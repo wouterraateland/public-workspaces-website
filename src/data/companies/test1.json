@@ -1,0 +1,10 @@
+{
+  "id": "a",
+  "name": "Test 1",
+  "city": "Delft",
+  "isOpen": true,
+  "wifiSpeed": 10,
+  "images": [
+    "https://media-cdn.tripadvisor.com/media/photo-s/0c/0e/61/91/cafe-amore.jpg"
+  ]
+}
