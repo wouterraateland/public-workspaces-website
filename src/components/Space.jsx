@@ -16,9 +16,18 @@ const Header = styled.div`
     cover;
 `;
 
-const Meta = styled.div``;
+const Meta = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 
-const Name = styled.h3``;
+  margin-top: 0.5em;
+`;
+
+const Name = styled.h3`
+  max-width: calc(100% - 1em);
+  margin: 0 0.5em 0 0;
+`;
 
 const OpenStatus = styled.div`
   width: 0.5em;
@@ -32,7 +41,7 @@ const OpenStatus = styled.div`
 
 const Space = ({ space }) => (
   <Container>
-    <Link to={`${space.city}/${space.name}`}>
+    <Link to={`${space.city}/${space.slug}`}>
       <Header backgroundImage={space.images[0]} />
     </Link>
     <Meta>

@@ -1,6 +1,7 @@
 {
   "id": "c",
-  "name": "Test 2",
+  "name": "Test 3",
+  "slug": "test-3",
   "city": "Delft",
   "isOpen": null,
   "wifiSpeed": 20,

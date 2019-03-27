@@ -1,3 +1,5 @@
+import "typeface-merriweather-sans";
+
 import React from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { opacify, transparentize } from "polished";
@@ -21,8 +23,8 @@ const theme = {
     gap: "0.5em"
   },
   font: {
-    copy: "Montserrat, sans-serif",
-    heading: '"Playfair Display", serif'
+    copy: "'Merriweather Sans', sans-serif",
+    heading: "'Merriweather Sans', sans-serif"
   }
 };
 
@@ -58,7 +60,7 @@ export const GlobalStyles = createGlobalStyle`
 
   h1, h2, h3, h4, h5, h6 {
     color: ${theme.color.emphasis};
-    font-weight: normal;
+    font-weight: 600;
     font-family: ${theme.font.heading};
   }
 

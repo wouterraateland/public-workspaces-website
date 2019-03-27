@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useStaticQuery, grapqhl } from "gatsby";
+import firstBy from "thenby";
 
+import Wrapper from "./Wrapper";
 import SpaceControls from "./SpaceControls";
 import SpaceOverview from "./SpaceOverview";
 
@@ -9,19 +11,15 @@ const ORDER = {
   DESCENDING: -1
 };
 
-const SpaceBrowser = ({ initialLocation, initialOrder, initialFilters }) => {
-  const [state, setState] = useState({
-    location: initialLocation,
-    order: initialOrder,
-    filters: initialFilters
-  });
-
+const SpaceBrowser = ({ initialCity, initialOrder, initialFilters }) => {
   const data = useStaticQuery(graphql`
     query AllSpacesQuery {
       allCompaniesJson {
         edges {
           node {
+            id
             name
+            slug
             city
             isOpen
             wifiSpeed
@@ -31,21 +29,31 @@ const SpaceBrowser = ({ initialLocation, initialOrder, initialFilters }) => {
       }
     }
   `);
-
   const allSpaces = data.allCompaniesJson.edges.map(edge => edge.node);
 
+  const [state, setState] = useState({
+    city: initialCity,
+    order: initialOrder,
+    filters: initialFilters
+  });
+  const { city, order, filters } = state;
+
+  const comparator = useMemo(() => firstBy(order.key, order.order), [order]);
+
   const targetedSpaces = allSpaces
-    .filter(() => true)
-    .sort((a, b) => (a > b ? 1 : a < b ? -1 : 0));
+    .filter(space => space.city === city)
+    .sort(comparator);
 
   const maybeTargetedSpaces = allSpaces
-    .filter(space =>
-      targetedSpaces.every(targetedSpace => targetedSpace.id !== space.id)
+    .filter(
+      space =>
+        space.city === city &&
+        targetedSpaces.every(targetedSpace => targetedSpace.id !== space.id)
     )
-    .sort((a, b) => (a > b ? 1 : a < b ? -1 : 0));
+    .sort(comparator);
 
   return (
-    <>
+    <Wrapper size="large">
       <SpaceControls
         spaceState={state}
         setSpaceState={setState}
@@ -57,12 +65,12 @@ const SpaceBrowser = ({ initialLocation, initialOrder, initialFilters }) => {
         targetedSpaces={targetedSpaces}
         maybeTargetedSpaces={maybeTargetedSpaces}
       />
-    </>
+    </Wrapper>
   );
 };
 
 SpaceBrowser.defaultProps = {
-  initialLocation: "Delft",
+  initialCity: "Delft",
   initialOrder: {
     key: "Popularity",
     order: ORDER.ASCENDING
