@@ -13,11 +13,11 @@ import Img from "gatsby-image";
  * - `StaticQuery`: https://gatsby.dev/staticquery
  */
 
-const Image = () => (
+const Image2 = () => (
   <StaticQuery
     query={graphql`
       query {
-        placeholderImage: file(relativePath: { eq: "swaab.png"}) {
+        placeholderImage: file(relativePath: { eq: "wouter.jpeg"}) {
           childImageSharp {
             fluid(maxWidth: 300) {
               ...GatsbyImageSharpFluid
@@ -29,4 +29,4 @@ const Image = () => (
     render={data => <Img fluid={data.placeholderImage.childImageSharp.fluid} />}
   />
 );
-export default Image;
+export default Image2;
