@@ -7,14 +7,9 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  border-bottom: 0.1em solid #0001;
-  margin: 0.5em 0;
 `;
 
-const Title = styled.h2`
-  margin: 0.25em 0;
-`;
+const Title = styled.h2``;
 
 const ResultsTitle = ({ children }) => (
   <Container>
