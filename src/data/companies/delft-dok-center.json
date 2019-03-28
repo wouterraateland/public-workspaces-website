@@ -1,0 +1,12 @@
+{
+  "id": "d",
+  "name": "DOK Center",
+  "slug": "delft/dok-center",
+  "city": "Delft",
+  "isOpen": true,
+  "wifiSpeed": 7,
+  "coffeePrice": 2.2,
+  "images": [
+    "https://modelprogrammer.slks.dk/uploads/tx_templavoila/DOK_40.jpg"
+  ]
+}

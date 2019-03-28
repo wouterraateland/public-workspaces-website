@@ -1,0 +1,12 @@
+{
+  "id": "CoffeeCompany",
+  "name": "CoffeeCompany",
+  "slug": "delft/coffee-company",
+  "city": "Delft",
+  "isOpen": true,
+  "wifiSpeed": 8,
+  "coffeePrice": 2.8,
+  "images": [
+    "https://coffeecompany.nl/uploads/location_visual/visual/105/large_delft6.jpg"
+  ]
+}
