@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "gatsby";
 
-import Wrapper from "./Wrapper";
+import Logo from "components/Logo";
+import Wrapper from "components/Wrapper";
 
 const NavContainer = styled.nav`
   border-bottom: 0.1em solid #0001;
@@ -14,21 +15,25 @@ const NavWrapper = styled(Wrapper)`
   align-items: center;
 `;
 
-const Logo = styled.div`
-  &::after {
-    content: '${props => props.siteTitle}';
-  }
+const StyledLogo = styled(Logo)`
+  height: 2em;
+  margin-right: 0.5em;
+  vertical-align: middle;
 `;
 
 const Title = styled.h1`
+  display: inline-block;
+
   font-size: 1.5em;
+  vertical-align: middle;
+
   color: ${props => props.theme.color.primary};
 `;
 
 const ControlsContainer = styled.div`
   flex-grow: 1;
 
-  margin: 0 1em;
+  margin: 0 2em;
 `;
 
 const NavLinks = styled.div``;
@@ -41,7 +46,7 @@ const Nav = ({ siteTitle, children }) => (
   <NavContainer>
     <NavWrapper size="large">
       <Link to="/">
-        <Logo />
+        <StyledLogo />
         <Title>{siteTitle}</Title>
       </Link>
       <ControlsContainer>{children}</ControlsContainer>
