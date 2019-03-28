@@ -7,17 +7,23 @@ const ForWorkersPage = () => (
   <Layout>
     <SEO title="For Workers" />
     <h1>For the hard worker</h1>
-    <p>Public Workspaces can give you the information you need when you want to work from outside your house.
-    All the information on the places are based on received data from the place itself. Go ahead and try it for yourself.
+    <p>
+      Public Workspaces gives you all the information you can ask for, when you
+      want to work somewhere outside of the confines of your home or your
+      regular office. All the information on the places is based on data
+      provided by the place itself.
     </p>
-    <ol>
-      <li>Pick a place</li>
-      <li>Select some filters</li>
-      <li>Sort</li>
-      <li>Pick a place</li>
-      <li>And work your day!</li>
-    </ol>
-
+    <p>
+      If you feel like some information is not right, or if you have any
+      suggestions, ideas or critiques, feel free to send us an email at{" "}
+      <a
+        href="mailto:info@publicworkspaces.com"
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        info@publicworkspaces.com
+      </a>
+    </p>
   </Layout>
 );
 
