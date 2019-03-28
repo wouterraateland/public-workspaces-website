@@ -31,8 +31,10 @@ const LocationIcon = styled.span`
   width: 1em;
   height: 1em;
   margin: 0.5em;
-  border: 0.1em solid ${props => props.theme.color.text};
+  border: 0.1em solid #000;
   border-radius: 100%;
+
+  opacity: 0.6;
 
   &::before,
   &::after {
@@ -42,18 +44,20 @@ const LocationIcon = styled.span`
     left: 50%;
     top: 50%;
 
-    background: ${props => props.theme.color.text};
+    border-radius: 0.1em;
+
+    background: #000;
 
     transform: translate(-50%, -50%);
   }
 
   &::before {
     width: 1.2em;
-    height: 0.1em;
+    height: 0.2em;
   }
 
   &::after {
-    width: 0.1em;
+    width: 0.2em;
     height: 1.2em;
   }
 `;
