@@ -1,11 +1,12 @@
 {
-  "id": "b",
-  "name": "Test 2",
-  "city": "Rotterdam",
-  "slug": "rotterdam/test-2",
+  "id": "CoffeeCompany",
+  "name": "CoffeeCompany",
+  "slug": "CoffeeCompany",
+  "city": "Delft",
   "isOpen": false,
-  "wifiSpeed": 10,
+  "wifiSpeed": 8,
+  "coffeePrice": 2.80,
   "images": [
-    "https://media-cdn.tripadvisor.com/media/photo-s/0c/0e/61/91/cafe-amore.jpg"
+    "https://www.google.com/maps/place/coffeecompany/@52.0110098,4.3583668,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipPKdTav89TvQ5x2SUz_JYJOofFsgnyYLj4vOsM_!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipPKdTav89TvQ5x2SUz_JYJOofFsgnyYLj4vOsM_%3Dw203-h114-k-no!7i1920!8i1080!4m8!1m2!2m1!1scoffeecompany!3m4!1s0x0:0x43c56966dec8c208!8m2!3d52.0109691!4d4.3581927#"
   ]
 }

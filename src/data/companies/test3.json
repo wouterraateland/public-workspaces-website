@@ -1,9 +1,10 @@
 {
   "id": "c",
-  "name": "Cafe'tje",
+  "name": "TU Delft Library",
+  "slug": "tudlibrary",
   "city": "Delft",
-  "slug": "delft/test-3",
-  "isOpen": null,
-  "wifiSpeed": 20,
-  "images": []
+  "isOpen": true,
+  "wifiSpeed": 15,
+  "coffeePrice": 2.40,
+  "images": ["https://www.google.com/maps/place/TU+Delft+Library/@52.002589,4.375263,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipMpf1MiRE1B3zf-V1oJvHM8yFfjJDGDb1yChos!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipMpf1MiRE1B3zf-V1oJvHM8yFfjJDGDb1yChos%3Dw203-h135-k-no!7i2227!8i1488!4m5!3m4!1s0x47c5b58d401d6c4b:0x531543fe94141f70!8m2!3d52.0027092!4d4.3753094#"]
 }

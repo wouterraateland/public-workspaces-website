@@ -1,11 +1,12 @@
 {
   "id": "d",
-  "name": "Mooie plaats",
+  "name": "DOK Center",
+  "slug": "dok",
   "city": "Delft",
-  "slug": "delft/test-4",
-  "isOpen": null,
-  "wifiSpeed": 15,
+  "isOpen": true,
+  "wifiSpeed": 7,
+  "coffeePrice": 2.20,
   "images": [
-    "https://media-cdn.tripadvisor.com/media/photo-s/0c/0e/61/91/cafe-amore.jpg"
+    "https://www.google.com/maps/place/DOK+Center/@52.008808,4.362965,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipMcJJUIeMTZo_RnSKJu_OaA6vQwzNLlX3ZPxkro!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipMcJJUIeMTZo_RnSKJu_OaA6vQwzNLlX3ZPxkro%3Dw203-h134-k-no!7i4288!8i2848!4m8!1m2!2m1!1sdok!3m4!1s0x47c5b5ea1663715f:0xe63931d17b159ffc!8m2!3d52.008808!4d4.362965#"
   ]
 }

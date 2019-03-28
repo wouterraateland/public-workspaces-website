@@ -1,0 +1,11 @@
+{
+  "id": "e",
+  "name": "KeK",
+  "slug": "kek",
+  "city": "Delft",
+  "isOpen": false,
+  "wifiSpeed": 9,
+  "coffeePrice": 3.0,
+  "images": [
+"https://www.google.com/maps/place/Kek+-+De+koffiebar+van+Delft/@52.0125477,4.359959,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipNCFyADicCYkbHAnS8Oj6z_GL9YDxBEtLnRcXPN!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipNCFyADicCYkbHAnS8Oj6z_GL9YDxBEtLnRcXPN%3Dw114-h86-k-no!7i3648!8i2736!4m5!3m4!1s0x47c5b5c2f7f74a0b:0xc1aede3efb4c09c2!8m2!3d52.0125804!4d4.3599223#"  ]
+}

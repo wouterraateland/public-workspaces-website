@@ -1,12 +1,12 @@
 {
   "id": "a",
-  "name": "Test 1",
+  "name": "`Coffee-Star",
+  "slug": "Coffee-Star",
   "city": "Delft",
-  "slug": "delft/test-1",
   "isOpen": true,
   "wifiSpeed": 10,
+  "coffeePrice": 2.70,
   "images": [
-    "https://media-cdn.tripadvisor.com/media/photo-s/0c/0e/61/91/cafe-amore.jpg",
-    "https://images.unsplash.com/photo-1521017432531-fbd92d768814?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+    "https://www.google.com/maps/place/Coffee-star/@52.0025812,4.3753,3a,75.5y,90t/data=!3m8!1e2!3m6!1sAF1QipMFnBoqGOlz31icPNTFYwgiSEDehoLPDzd2SYuU!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipMFnBoqGOlz31icPNTFYwgiSEDehoLPDzd2SYuU%3Dw203-h135-k-no!7i1200!8i800!4m5!3m4!1s0x0:0x835f3e5afeeac049!8m2!3d52.0025812!4d4.3753#"
   ]
 }
