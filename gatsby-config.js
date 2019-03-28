@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`
+    title: `Public Workspaces`,
+    description: `Find public workspaces near to you in a breeze.`,
+    author: `@wouterraateland, @DSwaab`
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -32,6 +32,20 @@ module.exports = {
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png` // This path is relative to the root of the site.
+      }
+    },
+    {
+      resolve: "gatsby-plugin-root-import",
+      options: {
+        src: `${__dirname}/src`,
+        components: `${__dirname}/src/components`,
+        containers: `${__dirname}/src/containers`,
+        contexts: `${__dirname}/src/contexts`,
+        data: `${__dirname}/src/data`,
+        hooks: `${__dirname}/src/hooks`,
+        images: `${__dirname}/src/images`,
+        pages: `${__dirname}/src/pages`,
+        utils: `${__dirname}/src/utils`
       }
     },
     `gatsby-plugin-styled-components`

@@ -1,24 +1,35 @@
 import React from "react";
 
-import SpaceList from "./SpaceList";
+import useSpaceControls from "hooks/useSpaceControls";
 
-const SpaceOverview = ({ targetedSpaces, maybeTargetedSpaces }) => (
-  <>
-    {targetedSpaces.length > 0 ? (
-      <>
-        <h2>Found {targetedSpaces.length} workspaces matching your query</h2>
-        <SpaceList spaces={targetedSpaces} />
-      </>
-    ) : (
-      <h2>No workspaces found</h2>
-    )}
-    {maybeTargetedSpaces.length > 0 ? (
-      <>
-        <h2>Found {targetedSpaces.length} alternative workspaces</h2>
-        <SpaceList spaces={maybeTargetedSpaces} />
-      </>
-    ) : null}
-  </>
-);
+import SpaceList from "components/SpaceList";
+import ResultsTitle from "components/ResultsTitle";
+
+const SpaceOverview = () => {
+  const { targetedSpaces, maybeTargetedSpaces } = useSpaceControls();
+
+  return (
+    <>
+      {targetedSpaces.length > 0 ? (
+        <>
+          <ResultsTitle>
+            Found {targetedSpaces.length} workspaces matching your query
+          </ResultsTitle>
+          <SpaceList spaces={targetedSpaces} />
+        </>
+      ) : (
+        <h2>No workspaces found</h2>
+      )}
+      {maybeTargetedSpaces.length > 0 ? (
+        <>
+          <ResultsTitle>
+            Found {targetedSpaces.length} alternative workspaces
+          </ResultsTitle>
+          <SpaceList spaces={maybeTargetedSpaces} />
+        </>
+      ) : null}
+    </>
+  );
+};
 
 export default SpaceOverview;

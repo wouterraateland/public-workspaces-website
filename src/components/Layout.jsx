@@ -1,28 +1,43 @@
 import React from "react";
-import { StaticQuery, graphql } from "gatsby";
+import { useStaticQuery, graphql } from "gatsby";
+
+import { SpaceControlsProvider } from "../contexts/SpaceControls";
 
 import Theme from "../containers/Theme";
-import Header from "./Header";
 
-const Layout = ({ children }) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
+import Wrapper from "./Wrapper";
+import Nav from "./Nav";
+
+const Layout = ({ size, children, navChildren }) => {
+  const data = useStaticQuery(graphql`
+    query AllSpacesQuery {
+      allCompaniesJson {
+        edges {
+          node {
+            id
+            name
+            slug
+            city
+            isOpen
+            wifiSpeed
+            images
           }
         }
       }
-    `}
-    render={data => (
+    }
+  `);
+  const allSpaces = data.allCompaniesJson.edges.map(edge => edge.node);
+
+  return (
+    <SpaceControlsProvider allSpaces={allSpaces}>
       <Theme>
-        <Header siteTitle={data.site.siteMetadata.title} />
-        <main>{children}</main>
+        <Nav siteTitle="Public Workspaces">{navChildren}</Nav>
+        <main>
+          <Wrapper size={size}>{children}</Wrapper>
+        </main>
         <footer />
       </Theme>
-    )}
-  />
-);
-
+    </SpaceControlsProvider>
+  );
+};
 export default Layout;
