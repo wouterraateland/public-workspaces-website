@@ -23,6 +23,7 @@ const Layout = ({ size, children, navChildren }) => {
             city
             isOpen
             wifiSpeed
+            coffeePrice
             images
           }
         }
