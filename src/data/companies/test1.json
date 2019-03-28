@@ -1,11 +1,12 @@
 {
   "id": "a",
   "name": "Test 1",
-  "slug": "test-1",
   "city": "Delft",
+  "slug": "delft/test-1",
   "isOpen": true,
   "wifiSpeed": 10,
   "images": [
-    "https://media-cdn.tripadvisor.com/media/photo-s/0c/0e/61/91/cafe-amore.jpg"
+    "https://media-cdn.tripadvisor.com/media/photo-s/0c/0e/61/91/cafe-amore.jpg",
+    "https://images.unsplash.com/photo-1521017432531-fbd92d768814?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
   ]
 }

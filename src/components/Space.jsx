@@ -41,7 +41,7 @@ const OpenStatus = styled.div`
 
 const Space = ({ space }) => (
   <Container>
-    <Link to={`${space.city}/${space.slug}`}>
+    <Link to={`/${space.slug}`}>
       <Header backgroundImage={space.images[0]} />
     </Link>
     <Meta>

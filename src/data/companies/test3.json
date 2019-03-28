@@ -1,8 +1,8 @@
 {
   "id": "c",
   "name": "Cafe'tje",
-  "slug": "test-3",
   "city": "Delft",
+  "slug": "delft/test-3",
   "isOpen": null,
   "wifiSpeed": 20,
   "images": []

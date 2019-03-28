@@ -1,8 +1,8 @@
 {
   "id": "b",
   "name": "Test 2",
-  "slug": "test-2",
   "city": "Rotterdam",
+  "slug": "rotterdam/test-2",
   "isOpen": false,
   "wifiSpeed": 10,
   "images": [

@@ -1,8 +1,8 @@
 {
   "id": "d",
   "name": "Mooie plaats",
-  "slug": "test-4",
   "city": "Delft",
+  "slug": "delft/test-4",
   "isOpen": null,
   "wifiSpeed": 15,
   "images": [
