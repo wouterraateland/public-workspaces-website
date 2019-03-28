@@ -72,7 +72,7 @@ const SpaceBrowser = ({ initialCity, initialOrder, initialFilters }) => {
 SpaceBrowser.defaultProps = {
   initialCity: "Delft",
   initialOrder: {
-    key: "Popularity",
+    key: "popularity",
     order: ORDER.ASCENDING
   },
   initialFilters: []

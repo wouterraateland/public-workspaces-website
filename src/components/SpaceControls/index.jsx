@@ -14,17 +14,30 @@ const SpaceControls = ({
   targetedSpaces
 }) => {
   const changeCity = useCallback(
-    city => setSpaceState(state => ({ ...state, city })),
+    f =>
+      setSpaceState(state => ({
+        ...state,
+        city: typeof f === "function" ? f(state.city) : f
+      })),
     []
   );
   const changeOrder = useCallback(
-    order => setSpaceState(state => ({ ...state, order })),
+    f =>
+      setSpaceState(state => ({
+        ...state,
+        order: typeof f === "function" ? f(state.order) : f
+      })),
     []
   );
   const changeFilters = useCallback(
-    filters => setSpaceState(state => ({ ...state, filters })),
+    f =>
+      setSpaceState(state => ({
+        ...state,
+        filters: typeof f === "function" ? f(state.filters) : f
+      })),
     []
   );
+  console.log(spaceState);
 
   const allCities = _.unique(_.mapKey("city")(allSpaces));
 
