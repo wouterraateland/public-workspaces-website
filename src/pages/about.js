@@ -28,8 +28,10 @@ const AboutPage = () => (
     </p>
     <h2>Current status</h2>
     <p>
-      At this moment, information on public spaces in Delft is becoming
-      available. Next, we will launch in more cities in the Netherlands!
+      At this moment, the index page contains some placeholders containing data
+      we gathered ourselves. Information on public spaces in Delft is becoming
+      available quickly. Other cities will follow when we are established in
+      Delft.
     </p>
     <p>Public workspaces is build by:</p>
     <Half>
