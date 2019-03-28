@@ -77,14 +77,14 @@ module.exports = {
         utils: `${__dirname}/src/utils`
       }
     },
-    {
-      resolve: "gatsby-source-google-sheets",
-      options: {
-        spreadsheetId: process.env.GOOGLE_SHEETS_SPREADSHEET_ID,
-        worksheetTitle: process.env.GOOGLE_SHEETS_WORKSHEET_TITLE,
-        credentials: googleSpreadsheetCredentials
-      }
-    },
+    // {
+    //   resolve: "gatsby-source-google-sheets",
+    //   options: {
+    //     spreadsheetId: process.env.GOOGLE_SHEETS_SPREADSHEET_ID,
+    //     worksheetTitle: process.env.GOOGLE_SHEETS_WORKSHEET_TITLE,
+    //     credentials: googleSpreadsheetCredentials
+    //   }
+    // },
     `gatsby-plugin-styled-components`
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
