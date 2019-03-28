@@ -121,7 +121,7 @@ const Button = styled.button`
 `;
 
 const CityControl = () => {
-  const { allSpaces, city, setCity } = useSpaceControls();
+  const { allSpaces, city, setCity, showFilters } = useSpaceControls();
 
   const allCities = useMemo(() => _.unique(_.mapKey("city")(allSpaces)), [
     allSpaces
@@ -139,7 +139,7 @@ const CityControl = () => {
           ))}
         </Select>
       </Container>
-      <Button>
+      <Button onClick={showFilters}>
         <FilterIcon />
       </Button>
     </>

@@ -17,7 +17,7 @@ export const useSpaceControlsProvider = ({ allSpaces }) => {
     filters: [],
     filtersVisible: false
   });
-  const { city, order, filters } = state;
+  const { city, order, filters, filtersVisible } = state;
 
   const setCity = useCallback(
     f =>
@@ -83,6 +83,7 @@ export const useSpaceControlsProvider = ({ allSpaces }) => {
     setOrder,
     filters,
     setFilters,
+    filtersVisible,
     showFilters,
     hideFilters,
     allSpaces,
