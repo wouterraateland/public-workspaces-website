@@ -56,57 +56,51 @@ const OpenStatus = styled.div`
 
 const Corner = styled.small`
   position: absolute;
-  padding: 1.5em;
+  padding: 0.5em;
+  margin: 1em;
+  border-radius: 1em;
+  box-shadow: 0 0.25em 0.75em -0.25em #0006;
 
   line-height: 1;
 
-  background-color: #0004;
-  color: #fff;
+  background-color: #fff;
 `;
 
 const TopLeft = styled(Corner)`
-  top: -1em;
-  left: -1em;
-
-  border-bottom-right-radius: 100%;
+  top: 0;
+  left: 0;
 `;
 
 const TopRight = styled(Corner)`
-  top: -1em;
-  right: -1em;
-
-  border-bottom-left-radius: 100%;
+  top: 0;
+  right: 0;
 `;
 
 const BottomRight = styled(Corner)`
-  bottom: -1em;
-  right: -1em;
-
-  border-top-left-radius: 100%;
+  bottom: 0;
+  right: 0;
 `;
 
 const BottomLeft = styled(Corner)`
-  bottom: -1em;
-  left: -1em;
-
-  border-top-right-radius: 100%;
+  bottom: 0;
+  left: 0;
 `;
 
 const Space = ({ space }) => (
   <Container>
     <StyledLink to={`/${space.slug}`}>
-      <Header backgroundImage={space.images[0]}>
+      <Header backgroundImage={space.images}>
         <TopLeft>
           <span role="img" aria-labelledby="Coffee Price">
             ☕️
           </span>{" "}
-          €{space.coffeePrice}
+          {space.coffeePrice ? `€${space.coffeePrice}` : "?"}
         </TopLeft>
         <TopRight>
           <span role="img" aria-labelledby="WiFi Speed">
             📶
           </span>{" "}
-          {space.wifiSpeed}Mbps
+          {space.wifiSpeed ? space.wifiSpeed : "?"}Mbps
         </TopRight>
         <BottomRight />
         <BottomLeft />

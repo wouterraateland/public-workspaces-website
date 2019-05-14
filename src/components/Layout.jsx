@@ -14,23 +14,64 @@ import Main from "components/Main";
 const Layout = ({ size, children, navChildren }) => {
   const data = useStaticQuery(graphql`
     query AllSpacesQuery {
-      allCompaniesJson {
+      allAirtable(filter: { table: { eq: "Workspaces" } }) {
         edges {
           node {
             id
-            name
-            slug
-            city
-            isOpen
-            wifiSpeed
-            coffeePrice
-            images
+            data {
+              name: Name
+              city: City
+              slug: Slug
+              categories: Categories
+              comments: Comments
+              images: Images {
+                raw {
+                  thumbnails {
+                    large {
+                      url
+                      width
+                      height
+                    }
+                  }
+                }
+              }
+
+              customerPreference: Customer_Preference
+              coffeePrice: Coffee_Price
+
+              wifiAvailability: WiFi_Availability
+              wifiSpeed: WiFi_Speed
+
+              electricityAvailability: Electricity_Availability
+              freeWaterAvailability: Free_Water_Availability
+              freeToiletAvailability: Free_Toilet_Availability
+              bringYourOwnFood: Bring_Your_Own_Food
+
+              privateSpaces: Private_Spaces {
+                data {
+                  name: Name
+                  comments: Comments
+
+                  facilities: Facilities
+                  suitableWorkTypes: Suitable_Work_Types
+                  price: Price
+                  period: Period
+                  persons: Persons
+                }
+              }
+            }
           }
         }
       }
     }
   `);
-  const allSpaces = data.allCompaniesJson.edges.map(edge => edge.node);
+  const allSpaces = data.allAirtable.edges.map(edge => ({
+    id: edge.node.id,
+    ...edge.node.data,
+    images: edge.node.data.images
+      ? edge.node.data.images.raw.map(raw => raw.thumbnails.large.url)
+      : []
+  }));
 
   return (
     <SpaceControlsProvider allSpaces={allSpaces}>

@@ -43,7 +43,7 @@ const CurrentSlide = styled.div`
   }
 `;
 
-const Slider = ({ images }) => {
+const Slider = ({ images = [] }) => {
   const [currentImage, setCurrentImage] = useState(0);
 
   useEffect(() => setCurrentImage(0), [images]);

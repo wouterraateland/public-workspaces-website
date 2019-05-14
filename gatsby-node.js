@@ -15,27 +15,23 @@ exports.createPages = ({ graphql, actions }) => {
 
   return graphql(`
     {
-      allCompaniesJson {
+      allAirtable(filter: { table: { eq: "Workspaces" } }) {
         edges {
           node {
-            id
-            name
-            slug
-            city
-            isOpen
-            wifiSpeed
-            images
+            data {
+              slug: Slug
+            }
           }
         }
       }
     }
   `).then(result => {
-    result.data.allCompaniesJson.edges.forEach(({ node }) => {
+    result.data.allAirtable.edges.forEach(({ node: { data } }) => {
       createPage({
-        path: node.slug,
+        path: data.slug,
         component: path.resolve(`./src/templates/space-details.jsx`),
         context: {
-          slug: node.slug
+          slug: data.slug
         }
       });
     });
