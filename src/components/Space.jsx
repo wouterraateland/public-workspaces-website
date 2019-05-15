@@ -25,30 +25,60 @@ const Header = styled.div`
 
   background: #0004 url(${props => props.backgroundImage}) no-repeat center /
     cover;
-`;
 
-const Meta = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
 
-  margin-top: 0.5em;
+    background: #0004;
+  }
 `;
 
 const Name = styled.h3`
-  max-width: calc(100% - 1em);
-  margin: 0 0.5em 0 0;
+  position: absolute;
+  left: 0;
+  bottom: 50%;
+  right: 0;
+
+  margin: 0;
+  text-shadow: 0 0.25 0.5em #0006;
+
+  text-align: center;
+  color: #fff;
+`;
+
+const City = styled.p`
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+
+  margin: 0;
+  text-shadow: 0 0.25 0.5em #0006;
+
+  text-align: center;
+  color: #fff;
 `;
 
 const StyledLink = styled(Link)`
   display: block;
+  position: relative;
 `;
 
 const OpenStatus = styled.div`
-  width: 0.5em;
-  height: 0.5em;
+  position: absolute;
+  bottom: -0.25em;
+  right: -0.25em;
+
+  width: 1em;
+  height: 1em;
 
   border-radius: 100%;
+  box-shadow: 0 0 0 0.25em #fff;
 
   background: ${props =>
     props.isOpen ? props.theme.color.success : props.theme.color.error};
@@ -76,20 +106,10 @@ const TopRight = styled(Corner)`
   right: 0;
 `;
 
-const BottomRight = styled(Corner)`
-  bottom: 0;
-  right: 0;
-`;
-
-const BottomLeft = styled(Corner)`
-  bottom: 0;
-  left: 0;
-`;
-
 const Space = ({ space }) => (
   <Container>
     <StyledLink to={`/${space.slug}`}>
-      <Header backgroundImage={space.images}>
+      <Header backgroundImage={space.images[0]}>
         <TopLeft>
           <span role="img" aria-labelledby="Coffee Price">
             ☕️
@@ -102,14 +122,11 @@ const Space = ({ space }) => (
           </span>{" "}
           {space.wifiSpeed ? space.wifiSpeed : "?"}Mbps
         </TopRight>
-        <BottomRight />
-        <BottomLeft />
+        <Name>{space.name}</Name>
+        <City>{space.city}</City>
       </Header>
-    </StyledLink>
-    <Meta>
-      <Name>{space.name}</Name>
       <OpenStatus isOpen={space.isOpen} />
-    </Meta>
+    </StyledLink>
   </Container>
 );
 

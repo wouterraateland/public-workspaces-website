@@ -12,9 +12,7 @@ const SpaceOverview = () => {
     <>
       {targetedSpaces.length > 0 ? (
         <>
-          <ResultsTitle>
-            Found {targetedSpaces.length} workspaces matching your query
-          </ResultsTitle>
+          <ResultsTitle>Found {targetedSpaces.length} workspaces</ResultsTitle>
           <SpaceList spaces={targetedSpaces} />
         </>
       ) : (

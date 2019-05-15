@@ -72,7 +72,7 @@ module.exports = {
             baseId: `appc4kmOlCItPKkiU`,
             tableName: `Workspaces`,
             mapping: {
-              Images: "fileNode"
+              Images: "[fileNode]"
             },
             tableLinks: ["Private_Spaces", "Contacts"]
           },
