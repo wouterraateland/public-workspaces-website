@@ -54,11 +54,20 @@ exports.sourceNodes = ({
     return fetch(apiUrl)
       .then(response => response.json())
       .then(data => {
-        const nodeData = processOpeningHours(
-          placeid,
+        if (
+          data &&
+          data.result &&
+          data.result.opening_hours &&
           data.result.opening_hours.periods
-        );
-        createNode(nodeData);
+        ) {
+          const nodeData = processOpeningHours(
+            placeid,
+            data.result.opening_hours.periods
+          );
+          createNode(nodeData);
+        } else {
+          console.warn(`No opening times for ${placeid}`);
+        }
       });
   };
 

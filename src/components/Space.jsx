@@ -125,12 +125,14 @@ const Space = ({ space }) => (
       <Header backgroundImage={space.images[0]}>
         <TopLeft>
           <Label role="img" aria-labelledby="Coffee Price">
+            {/* eslint-disable-next-line */}
             ☕️
           </Label>{" "}
           <strong>{space.coffeePrice ? `€${space.coffeePrice}` : "?"}</strong>
         </TopLeft>
         <TopRight>
           <Label role="img" aria-labelledby="WiFi Speed">
+            {/* eslint-disable-next-line */}
             📶
           </Label>
           <WiFiValue>
