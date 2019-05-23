@@ -11,6 +11,8 @@ const Indicator = styled.span`
 
   background-color: ${props =>
     props.theme.color[props.isOpen ? "success" : "error"]};
+
+  transform: scale(1.01);
 `;
 
 const OpenStatus = ({ openingHours }) => {

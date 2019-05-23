@@ -1,6 +1,7 @@
 const path = require("path");
 const fetch = require("node-fetch");
 const queryString = require("query-string");
+const { createRemoteFileNode } = require("gatsby-source-filesystem");
 
 exports.onCreateWebpackConfig = ({ getConfig, stage }) => {
   const config = getConfig();
@@ -16,14 +17,16 @@ exports.sourceNodes = ({
   getNodesByType,
   actions,
   createNodeId,
-  createContentDigest
+  createContentDigest,
+  store,
+  cache
 }) => {
   const airtableNodes = getNodesByType("Airtable");
   const workspaces = airtableNodes.filter(
     ({ table }) => table === "Workspaces"
   );
 
-  const { createNode } = actions;
+  const { createNode, createNodeField } = actions;
 
   const processOpeningHours = (placeId, periods) => {
     const data = { placeId, periods };
@@ -42,10 +45,52 @@ exports.sourceNodes = ({
     return nodeData;
   };
 
-  const createOpeningHoursNode = placeid => {
+  const createOpeningHourNodesForPlace = (placeid, opening_hours) => {
+    if (opening_hours && opening_hours.periods) {
+      const nodeData = processOpeningHours(placeid, opening_hours.periods);
+      createNode(nodeData);
+    } else {
+      console.warn(`No opening times for ${placeid}`);
+    }
+  };
+
+  const createPhotoNodeForPlace = async (placeId, photo) => {
     const apiOptions = queryString.stringify({
       key: process.env.GOOGLE_API_KEY,
-      fields: "opening_hours",
+      maxwidth: 640,
+      photoreference: photo.photo_reference
+    });
+
+    const url = `https://maps.googleapis.com/maps/api/place/photo?${apiOptions}`;
+
+    try {
+      const fileNode = await createRemoteFileNode({
+        url,
+        cache,
+        store,
+        createNode,
+        createNodeId
+      });
+
+      await createNodeField({
+        node: fileNode,
+        name: "placeId",
+        value: placeId
+      });
+
+      return fileNode;
+    } catch (error) {
+      console.warn("error creating node", error);
+    }
+  };
+
+  const createPhotoNodesForPlace = (placeid, photos = []) =>
+    Promise.all(photos.map(photo => createPhotoNodeForPlace(placeid, photo)));
+
+  const createNodesForPlace = placeid => {
+    const apiOptions = queryString.stringify({
+      key: process.env.GOOGLE_API_KEY,
+      fields: "opening_hours,photos",
       placeid
     });
 
@@ -53,20 +98,12 @@ exports.sourceNodes = ({
 
     return fetch(apiUrl)
       .then(response => response.json())
-      .then(data => {
-        if (
-          data &&
-          data.result &&
-          data.result.opening_hours &&
-          data.result.opening_hours.periods
-        ) {
-          const nodeData = processOpeningHours(
-            placeid,
-            data.result.opening_hours.periods
-          );
-          createNode(nodeData);
+      .then(async data => {
+        if (data && data.result) {
+          createOpeningHourNodesForPlace(placeid, data.result.opening_hours);
+          await createPhotoNodesForPlace(placeid, data.result.photos);
         } else {
-          console.warn(`No opening times for ${placeid}`);
+          console.warn(`No data for ${placeid}`);
         }
       });
   };
@@ -74,7 +111,7 @@ exports.sourceNodes = ({
   return Promise.all(
     workspaces
       .filter(({ data }) => data["Google_ID"])
-      .map(({ data }) => createOpeningHoursNode(data["Google_ID"]))
+      .map(({ data }) => createNodesForPlace(data["Google_ID"]))
   );
 };
 

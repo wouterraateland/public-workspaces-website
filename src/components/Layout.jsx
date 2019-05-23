@@ -18,6 +18,16 @@ const maybe = (ifNothing, ifJust) => v =>
 const Layout = ({ size, children, navChildren }) => {
   const data = useStaticQuery(graphql`
     query AllSpacesQuery {
+      allFile(filter: { fields: { placeId: { ne: null } } }) {
+        edges {
+          node {
+            publicURL
+            fields {
+              placeId
+            }
+          }
+        }
+      }
       allOpeningHours {
         edges {
           node {
@@ -97,9 +107,17 @@ const Layout = ({ size, children, navChildren }) => {
           openingHoursNode.placeId === spaceNode.data.placeId
       )
     ),
-    images: spaceNode.data.images
+    images: (spaceNode.data.images
       ? spaceNode.data.images.raw.map(raw => raw.thumbnails.large.url)
       : []
+    ).concat(
+      data.allFile.edges
+        .filter(
+          ({ node: fileNode }) =>
+            fileNode.fields.placeId === spaceNode.data.placeId
+        )
+        .map(({ node: fileNode }) => fileNode.publicURL)
+    )
   }));
 
   return (
