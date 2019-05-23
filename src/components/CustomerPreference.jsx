@@ -6,15 +6,16 @@ import Icons from "components/Icons";
 
 const Container = styled.div`
   position: absolute;
-  bottom: -0.25em;
-  right: -0.25em;
+  bottom: -0.5em;
+  right: -0.5em;
 
-  width: 2em;
-  height: 2em;
+  width: 2.5em;
+  height: 2.5em;
   padding: 0.25em;
+  border: 0.25em solid #fff;
 
   border-radius: 100%;
-  box-shadow: 0 0 0 0.5em #fff;
+  box-shadow: ${props => props.theme.boxShadow.small};
 
   text-align: center;
   color: #fff;

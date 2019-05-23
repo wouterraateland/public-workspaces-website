@@ -5,7 +5,7 @@ import { SpaceControlsProvider } from "contexts/SpaceControls";
 
 import Theme from "containers/Theme";
 
-import Wrapper from "components/Wrapper";
+import { Wrapper } from "components/UI";
 import Nav from "components/Nav";
 import Footer from "components/Footer";
 import Page from "components/Page";

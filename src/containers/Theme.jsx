@@ -16,7 +16,9 @@ const theme = {
   },
   borderRadius: "0.25em",
   boxShadow: {
-    medium: "0 0.5rem 1.5rem -.5rem #0004"
+    small: "0 0.25rem 0.7rem -0.25rem #0004",
+    medium: "0 0.5rem 1.5rem -0.5rem #0006",
+    large: "0 1rem 3rem -1rem #0009"
   },
   columns: {
     count: 12,
@@ -41,6 +43,18 @@ export const GlobalStyles = createGlobalStyle`
 
   html {
     font-family: ${theme.font.copy};
+
+    @media (max-width: 20em) {
+      font-size: 70%;
+    }
+
+    @media (min-width: 20em) and (max-width: 30em) {
+      font-size: calc(70% + ((100 - 70) / 100) * (100vw - 20rem) / (30 - 20));
+    }
+
+    @media (min-width: 30em) {
+      font-size: 100%;
+    }
   }
 
   body {

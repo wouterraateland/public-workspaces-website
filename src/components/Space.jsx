@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "gatsby";
 
+import { Pill } from "components/UI";
 import OpenStatus from "./OpenStatus";
 import CustomerPreference from "./CustomerPreference";
 
@@ -25,6 +26,7 @@ const Header = styled.div`
 
   padding-top: 67%;
   border-radius: ${props => props.theme.borderRadius};
+  box-shadow: ${props => props.theme.boxShadow.small};
 
   background: url(${props => props.backgroundImage}) no-repeat center / cover;
 
@@ -36,7 +38,7 @@ const Header = styled.div`
     bottom: 0;
     right: 0;
 
-    background: #0004;
+    background: #0006;
   }
 `;
 
@@ -71,31 +73,50 @@ const StyledLink = styled(Link)`
   position: relative;
 `;
 
-const Corner = styled.small`
+const Label = styled.span`
+  font-size: 1.5em;
+  line-height: 1.5em;
+`;
+
+const TopLeft = styled.small`
   position: absolute;
-  padding: 0.5em;
-  margin: 1em;
-  border-radius: 1em;
-  box-shadow: 0 0.25em 0.75em -0.25em #0006;
+  top: 0.5em;
+  left: 0.5em;
 
-  line-height: 1;
+  & * {
+    color: #fff;
+  }
 
-  background-color: #fff;
+  strong {
+    line-height: 2.25em;
+  }
 `;
 
-const TopLeft = styled(Corner)`
-  top: 0;
-  left: 0;
+const TopRight = styled.small`
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+
+  & * {
+    color: #fff;
+  }
 `;
 
-const TopRight = styled(Corner)`
-  top: 0;
-  right: 0;
+const WiFiValue = styled.span`
+  display: inline-block;
+  margin-left: 0.25em;
+
+  text-align: center;
 `;
 
-const BottomLeft = styled(Corner)`
+const BottomLeft = styled(Pill)`
+  position: absolute;
   left: 0;
   bottom: 0;
+
+  margin: 0.5em;
+
+  font-size: smaller;
 `;
 
 const Space = ({ space }) => (
@@ -103,16 +124,20 @@ const Space = ({ space }) => (
     <StyledLink to={`/${space.slug}`}>
       <Header backgroundImage={space.images[0]}>
         <TopLeft>
-          <span role="img" aria-labelledby="Coffee Price">
+          <Label role="img" aria-labelledby="Coffee Price">
             ☕️
-          </span>{" "}
-          {space.coffeePrice ? `€${space.coffeePrice}` : "?"}
+          </Label>{" "}
+          <strong>{space.coffeePrice ? `€${space.coffeePrice}` : "?"}</strong>
         </TopLeft>
         <TopRight>
-          <span role="img" aria-labelledby="WiFi Speed">
+          <Label role="img" aria-labelledby="WiFi Speed">
             📶
-          </span>{" "}
-          {space.wifiSpeed ? space.wifiSpeed : "?"}Mbps
+          </Label>
+          <WiFiValue>
+            <strong>{space.wifiSpeed ? space.wifiSpeed : "?"}</strong>
+            <br />
+            <small>Mbps</small>
+          </WiFiValue>
         </TopRight>
         <Name>{space.name}</Name>
         <City>{space.city}</City>

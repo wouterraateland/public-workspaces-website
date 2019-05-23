@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import moment from "moment";
 
-import Wrapper from "components/Wrapper";
+import { Wrapper } from "components/UI";
 
 const FooterContainer = styled.footer`
   padding: 1em 0;

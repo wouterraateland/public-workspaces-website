@@ -23,6 +23,15 @@ const OpenStatus = ({ openingHours }) => {
     ({ open, close }) => open.day <= now.day() && close.day >= now.day()
   );
 
+  if (!openingHoursToday) {
+    return (
+      <>
+        <Indicator />
+        Closed today
+      </>
+    );
+  }
+
   const open = moment(openingHoursToday.open.time, "HHmm");
   const close = moment(openingHoursToday.close.time, "HHmm");
 
