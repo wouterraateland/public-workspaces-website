@@ -16,12 +16,6 @@ module.exports = {
       }
     },
     `gatsby-transformer-json`,
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `${__dirname}/src/data`
-      }
-    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
@@ -56,7 +50,6 @@ module.exports = {
         components: `${__dirname}/src/components`,
         containers: `${__dirname}/src/containers`,
         contexts: `${__dirname}/src/contexts`,
-        data: `${__dirname}/src/data`,
         hooks: `${__dirname}/src/hooks`,
         images: `${__dirname}/src/images`,
         pages: `${__dirname}/src/pages`,
