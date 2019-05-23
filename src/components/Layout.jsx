@@ -11,9 +11,31 @@ import Footer from "components/Footer";
 import Page from "components/Page";
 import Main from "components/Main";
 
+const isNothing = v => v === undefined || v === null;
+const maybe = (ifNothing, ifJust) => v =>
+  isNothing(v) ? ifNothing(v) : ifJust(v);
+
 const Layout = ({ size, children, navChildren }) => {
   const data = useStaticQuery(graphql`
     query AllSpacesQuery {
+      allOpeningHours {
+        edges {
+          node {
+            id
+            placeId
+            periods {
+              open {
+                day
+                time
+              }
+              close {
+                day
+                time
+              }
+            }
+          }
+        }
+      }
       allAirtable(filter: { table: { eq: "Workspaces" } }) {
         edges {
           node {
@@ -22,8 +44,9 @@ const Layout = ({ size, children, navChildren }) => {
               name: Name
               city: City
               slug: Slug
+              placeId: Google_ID
               categories: Categories
-              comments: Comments
+              comments: Public_Comments
               images: Images {
                 raw {
                   thumbnails {
@@ -65,11 +88,17 @@ const Layout = ({ size, children, navChildren }) => {
       }
     }
   `);
-  const allSpaces = data.allAirtable.edges.map(edge => ({
-    id: edge.node.id,
-    ...edge.node.data,
-    images: edge.node.data.images
-      ? edge.node.data.images.raw.map(raw => raw.thumbnails.large.url)
+  const allSpaces = data.allAirtable.edges.map(({ node: spaceNode }) => ({
+    id: spaceNode.id,
+    ...spaceNode.data,
+    openingHours: maybe(() => null, edge => edge.node.periods)(
+      data.allOpeningHours.edges.find(
+        ({ node: openingHoursNode }) =>
+          openingHoursNode.placeId === spaceNode.data.placeId
+      )
+    ),
+    images: spaceNode.data.images
+      ? spaceNode.data.images.raw.map(raw => raw.thumbnails.large.url)
       : []
   }));
 

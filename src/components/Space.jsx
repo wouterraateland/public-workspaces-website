@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "gatsby";
 
+import OpenStatus from "./OpenStatus";
+import CustomerPreference from "./CustomerPreference";
+
 const Container = styled.div`
   width: 25%;
   padding: 0.5em;
@@ -23,8 +26,7 @@ const Header = styled.div`
   padding-top: 67%;
   border-radius: ${props => props.theme.borderRadius};
 
-  background: #0004 url(${props => props.backgroundImage}) no-repeat center /
-    cover;
+  background: url(${props => props.backgroundImage}) no-repeat center / cover;
 
   &::before {
     content: "";
@@ -69,21 +71,6 @@ const StyledLink = styled(Link)`
   position: relative;
 `;
 
-const OpenStatus = styled.div`
-  position: absolute;
-  bottom: -0.25em;
-  right: -0.25em;
-
-  width: 1em;
-  height: 1em;
-
-  border-radius: 100%;
-  box-shadow: 0 0 0 0.25em #fff;
-
-  background: ${props =>
-    props.isOpen ? props.theme.color.success : props.theme.color.error};
-`;
-
 const Corner = styled.small`
   position: absolute;
   padding: 0.5em;
@@ -106,6 +93,11 @@ const TopRight = styled(Corner)`
   right: 0;
 `;
 
+const BottomLeft = styled(Corner)`
+  left: 0;
+  bottom: 0;
+`;
+
 const Space = ({ space }) => (
   <Container>
     <StyledLink to={`/${space.slug}`}>
@@ -124,8 +116,13 @@ const Space = ({ space }) => (
         </TopRight>
         <Name>{space.name}</Name>
         <City>{space.city}</City>
+        {space.openingHours && (
+          <BottomLeft>
+            <OpenStatus openingHours={space.openingHours} />
+          </BottomLeft>
+        )}
       </Header>
-      <OpenStatus isOpen={space.isOpen} />
+      <CustomerPreference customerPreference={space.customerPreference} />
     </StyledLink>
   </Container>
 );
