@@ -14,6 +14,9 @@ const Indicator = styled.span`
 
   transform: scale(1.01);
 `;
+Indicator.defaultProps = {
+  isOpen: false
+};
 
 const OpenStatus = ({ openingHours }) => {
   if (!openingHours) {
@@ -43,27 +46,31 @@ const OpenStatus = ({ openingHours }) => {
     return (
       <>
         <Indicator />
-        Open today from {open.format("HH:mm")}
+        Opens at {open.format("HH:mm")}
       </>
     );
   } else if (now < close) {
     return (
       <>
         <Indicator isOpen />
-        Open until {close.format("HH:mm")}
+        Closes at {close.format("HH:mm")}
       </>
     );
   } else {
-    const openingHoursTomorrow = openingHours.find(
+    const nextOpeningHours = openingHours.find(
       ({ open, close }) =>
         (open.day + 6) % 7 <= now.day() && (close.day + 6) % 7 >= now.day()
     );
 
-    const openTomorrow = moment(openingHoursTomorrow.open.time, "HHmm");
+    const nextOpen = moment(nextOpeningHours.open.time, "HHmm");
     return (
       <>
         <Indicator />
-        Open tomorrow from {openTomorrow.format("HH:mm")}
+        Opens{" "}
+        {moment()
+          .day(nextOpeningHours.open.day)
+          .format("dd")}{" "}
+        at {nextOpen.format("HH:mm")}
       </>
     );
   }

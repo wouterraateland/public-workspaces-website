@@ -44,28 +44,36 @@ const Header = styled.div`
 
 const Name = styled.h3`
   position: absolute;
-  left: 0;
+  left: 0.5em;
   bottom: 50%;
-  right: 0;
+  right: 0.5em;
 
   margin: 0;
   text-shadow: 0 0.25 0.5em #0006;
 
   text-align: center;
   color: #fff;
+
+  @media (max-width: 30em) {
+    transform: translate(0, 50%);
+  }
 `;
 
 const City = styled.p`
   position: absolute;
   top: 50%;
-  left: 0;
-  right: 0;
+  left: 0.5em;
+  right: 0.5em;
 
   margin: 0;
   text-shadow: 0 0.25 0.5em #0006;
 
   text-align: center;
   color: #fff;
+
+  @media (max-width: 30em) {
+    display: none;
+  }
 `;
 
 const StyledLink = styled(Link)`
