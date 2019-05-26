@@ -9,7 +9,10 @@ const Container = styled.label`
   cursor: pointer;
 
   display: inline-block;
-  width: calc(100% - 2.2em);
+  width: calc(100% - 5.5em);
+
+  background-color: #fff;
+  background-clip: padding-box;
 
   border: 0.1em solid #0002;
   border-radius: ${props => props.theme.borderRadius} 0 0
@@ -64,6 +67,8 @@ const LocationIcon = styled.span`
 
 const FilterIcon = styled.div`
   position: relative;
+
+  display: inline-block;
   width: 1em;
   height: 1em;
 
@@ -101,14 +106,14 @@ const Select = styled.select`
 const Button = styled.button`
   cursor: pointer;
 
-  width: 2.2em;
+  width: 5.5em;
   padding: 0.6em;
   border: none;
   border-radius: 0 0.25em 0.25em 0;
 
   line-height: 1;
 
-  background-color: ${props => props.theme.color.primary};
+  background-color: #0004;
   color: #fff;
 
   &:hover {
@@ -140,7 +145,7 @@ const CityControl = () => {
         </Select>
       </Container>
       <Button onClick={showFilters}>
-        <FilterIcon />
+        <FilterIcon /> Filters
       </Button>
     </>
   );

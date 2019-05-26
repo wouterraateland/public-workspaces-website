@@ -20,7 +20,8 @@ const NavContainer = styled.nav`
       ? props.theme.boxShadow.medium
       : "0 .5rem 1.5rem -.5rem #0000"};
 
-  background-color: #fff;
+  background-color: ${props => props.theme.color.primary};
+  color: #fff;
 
   will-change: box-shadow;
   transition: box-shadow 0.2s ease-out;
@@ -52,6 +53,11 @@ const StyledMenuContainer = styled(Menu.Container)`
   flex-grow: 0;
 `;
 
+const Title = styled.h1`
+  margin: 0;
+  color: #fff;
+`;
+
 const Nav = ({ children }) => {
   const ref = useRef(null);
   const windowRef = useRef(typeof window === "undefined" ? null : window);
@@ -67,7 +73,9 @@ const Nav = ({ children }) => {
         <Link to="/">
           <StyledLogo />
         </Link>
-        <ControlsContainer>{children}</ControlsContainer>
+        <ControlsContainer>
+          {children ? children : <Title>Public Workspaces</Title>}
+        </ControlsContainer>
         <StyledMenuContainer ref={ref} onClick={toggleMenu}>
           <Menu.Toggle />
           <Menu.Items isOpen={isOpen}>

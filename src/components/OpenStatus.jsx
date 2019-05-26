@@ -62,6 +62,15 @@ const OpenStatus = ({ openingHours }) => {
         (open.day + 6) % 7 <= now.day() && (close.day + 6) % 7 >= now.day()
     );
 
+    if (!nextOpeningHours) {
+      return (
+        <>
+          <Indicator />
+          Closed today
+        </>
+      );
+    }
+
     const nextOpen = moment(nextOpeningHours.open.time, "HHmm");
     return (
       <>
