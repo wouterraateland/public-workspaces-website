@@ -59,7 +59,7 @@ const Title = styled.h1`
   color: #fff;
 `;
 
-const Nav = ({ children }) => {
+const Nav = ({ children, withFilters }) => {
   const ref = useRef(null);
   const windowRef = useRef(typeof window === "undefined" ? null : window);
 
@@ -86,7 +86,7 @@ const Nav = ({ children }) => {
           </Menu.Items>
         </StyledMenuContainer>
       </NavWrapper>
-      <FilterOptions />
+      {withFilters && <FilterOptions />}
     </NavContainer>
   );
 };

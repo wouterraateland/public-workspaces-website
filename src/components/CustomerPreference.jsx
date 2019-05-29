@@ -57,8 +57,8 @@ const Emote = ({ customerPreference }) => {
   return <Component size={1.5} />;
 };
 
-const CustomerPreference = ({ customerPreference }) => (
-  <Container customerPreference={customerPreference}>
+const CustomerPreference = ({ customerPreference, ...otherProps }) => (
+  <Container customerPreference={customerPreference} {...otherProps}>
     <Emote customerPreference={customerPreference} />
   </Container>
 );

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import moment from "moment";
 
 import useSpaceControls from "hooks/useSpaceControls";
 import useFilterVisibility from "hooks/useFilterVisibility";
@@ -86,6 +87,53 @@ const allFilters = [
     ]
   },
   {
+    name: "isOpen",
+    emoji: "⏰",
+    label: "Open",
+    options: [
+      {
+        value: "now",
+        label: "Now",
+        predicate: ({ openingHours }) => {
+          if (!openingHours) {
+            return false;
+          }
+          const now = moment();
+          const openingHoursToday = openingHours.find(
+            ({ open, close }) => open.day <= now.day() && close.day >= now.day()
+          );
+          if (!openingHoursToday) {
+            return false;
+          }
+          const open = moment(openingHoursToday.open.time, "HHmm");
+          const close = moment(openingHoursToday.close.time, "HHmm");
+          close.add(
+            openingHoursToday.close.day - openingHoursToday.open.day,
+            "days"
+          );
+          return now >= open && now <= close;
+        }
+      },
+      {
+        value: "tomorrow",
+        label: "Tomorrow",
+        predicate: ({ openingHours }) => {
+          if (!openingHours) {
+            return false;
+          }
+          const now = moment();
+          const tomorrow = (now.day() + 1) % 7;
+          const openingHoursTomorrow = openingHours.find(
+            ({ open, close }) =>
+              open.day <= tomorrow &&
+              (close.day >= tomorrow || (close.day === 0 && tomorrow === 6))
+          );
+          return openingHoursTomorrow;
+        }
+      }
+    ]
+  },
+  {
     name: "wifi",
     emoji: "📶",
     label: "WiFi Speed",
@@ -165,6 +213,25 @@ const allFilters = [
         value: "always",
         label: "Always",
         predicate: ({ bringYourOwnFood }) => bringYourOwnFood === "Ja"
+      }
+    ]
+  },
+  {
+    name: "privateSpaces",
+    emoji: "🤫",
+    label: "Private Spaces",
+    options: [
+      {
+        value: "rent",
+        label: "Has space for rent",
+        predicate: ({ privateSpaces }) => privateSpaces && privateSpaces.length
+      },
+      {
+        value: "free",
+        label: "Has space for free",
+        predicate: ({ privateSpaces }) =>
+          privateSpaces &&
+          privateSpaces.some(({ data: { price } }) => price === 0)
       }
     ]
   }

@@ -1,53 +1,15 @@
 import React from "react";
-import { graphql } from "gatsby";
 
-import Layout from "components/Layout";
-import SEO from "components/SEO";
-import Slider from "components/Slider";
+import useSpaces from "hooks/useSpaces";
 
-const DetailPage = ({ data }) => {
-  const place = {
-    ...data.airtable.data,
-    images: data.airtable.data.images
-      ? data.airtable.data.images.raw.map(raw => raw.thumbnails.full.url)
-      : []
-  };
+import IndexPage from "pages/index";
+import DetailModal from "components/DetailModal";
 
-  return (
-    <Layout size="large">
-      <SEO title={`${place.name}, ${place.city} | Public Workspaces`} />
-      <Slider images={place.images} />
-      <h1>
-        {place.name} - {place.city}
-      </h1>
-      <p>Further information follows</p>
-    </Layout>
-  );
+const DetailPage = ({ pageContext }) => {
+  const { allSpaces } = useSpaces();
+  const space = allSpaces.find(({ slug }) => slug === pageContext.slug);
+
+  return <IndexPage modal={<DetailModal space={space} />} />;
 };
 
 export default DetailPage;
-
-export const pageQuery = graphql`
-  query PlaceDetailsBySlug($slug: String!) {
-    airtable(data: { Slug: { eq: $slug } }) {
-      id
-      data {
-        name: Name
-        slug: Slug
-        city: City
-        wifiSpeed: WiFi_Speed
-        images: Images {
-          raw {
-            thumbnails {
-              full {
-                url
-                width
-                height
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
