@@ -4,37 +4,37 @@ import styled from "styled-components";
 import useSpaceControls from "hooks/useSpaceControls";
 
 const Filter = styled.span`
+  cursor: pointer;
   display: inline-block;
-  margin-right: 0.5em;
+  margin: 0 0.5em 0.5em 0;
 
   padding: 0.25em 0.5em;
 
   border-radius: ${props => props.theme.borderRadius};
 
-  background-color: ${props => props.theme.color.primary};
+  background-color: #0002;
+`;
+
+const Strong = styled.strong`
   color: #fff;
 `;
 
-const FilterContainer = styled.div`
-  overflow-x: auto;
-  overflow-y: hidden;
-
-  white-space: nowrap;
-`;
+const FilterContainer = styled.div``;
 
 const Filters = () => {
   const { filters, setFilters } = useSpaceControls();
 
   const deleteFilter = useCallback(
-    key => setFilters(filters => filters.filter(filter => filter.key !== key)),
+    name =>
+      setFilters(filters => filters.filter(filter => filter.name !== name)),
     []
   );
 
   return filters.length > 0 ? (
     <FilterContainer>
       {filters.map(filter => (
-        <Filter key={filter.key} onClick={() => deleteFilter(filter.key)}>
-          {filter.value} &times;
+        <Filter key={filter.name} onClick={() => deleteFilter(filter.name)}>
+          <Strong>{filter.label}</Strong> {filter.valueLabel} &times;
         </Filter>
       ))}
     </FilterContainer>

@@ -7,6 +7,7 @@ import useScroll from "hooks/useScroll";
 
 import Logo from "components/Logo";
 import { Menu, Wrapper } from "components/UI";
+import FilterOptions from "components/SpaceControls/FilterOptions";
 
 const NavContainer = styled.nav`
   position: fixed;
@@ -46,7 +47,7 @@ const StyledLogo = styled(Logo)`
 const ControlsContainer = styled.div`
   flex-grow: 1;
 
-  margin: 0 2em;
+  margin: 0 1em;
 `;
 
 const StyledMenuContainer = styled(Menu.Container)`
@@ -85,6 +86,7 @@ const Nav = ({ children }) => {
           </Menu.Items>
         </StyledMenuContainer>
       </NavWrapper>
+      <FilterOptions />
     </NavContainer>
   );
 };

@@ -1,6 +1,8 @@
-import { useContext, useCallback, useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import firstBy from "thenby";
 import SpaceControlsContext from "contexts/SpaceControls";
+
+import useSearchQuery from "hooks/useSearchQuery";
 
 const ORDER = {
   ASCENDING: 1,
@@ -8,84 +10,53 @@ const ORDER = {
 };
 
 export const useSpaceControlsProvider = ({ allSpaces }) => {
-  const [state, setState] = useState({
-    city: "Delft",
-    order: {
-      key: "popularity",
-      order: ORDER.ASCENDING
-    },
-    filters: [],
-    filtersVisible: false
+  const [order, setOrder] = useState({
+    key: "workerAppreciation",
+    order: ORDER.DESCENDING
   });
-  const { city, order, filters, filtersVisible } = state;
+  const [filters, setFilters] = useState([]);
 
-  const setCity = useCallback(
-    f =>
-      setState(state => ({
-        ...state,
-        city: typeof f === "function" ? f(state.city) : f
-      })),
-    []
-  );
-  const setOrder = useCallback(
-    f =>
-      setState(state => ({
-        ...state,
-        order: typeof f === "function" ? f(state.order) : f
-      })),
-    []
-  );
-  const setFilters = useCallback(
-    f =>
-      setState(state => ({
-        ...state,
-        filters: typeof f === "function" ? f(state.filters) : f
-      })),
-    []
+  const { query, setQuery, filteredData: resultingSpaces } = useSearchQuery(
+    allSpaces.filter(space => space.name && space.city),
+    ["name", "city"]
   );
 
-  const showFilters = useCallback(
-    () =>
-      setState(state => ({
-        ...state,
-        filtersVisible: true
-      })),
-    []
-  );
+  const comparator = useMemo(() => firstBy(order.key, order.order), [
+    order.key,
+    order.order
+  ]);
 
-  const hideFilters = useCallback(
-    () =>
-      setState(state => ({
-        ...state,
-        filtersVisible: false
-      })),
-    []
-  );
-
-  const comparator = useMemo(() => firstBy(order.key, order.order), [order]);
-
-  const targetedSpaces = allSpaces
-    .filter(space => space.city === city)
-    .sort(comparator);
-
-  const maybeTargetedSpaces = allSpaces
-    .filter(
-      space =>
-        space.city === city &&
-        targetedSpaces.every(targetedSpace => targetedSpace.id !== space.id)
+  const sortedSpaces = [
+    ...resultingSpaces
+      .filter(
+        space => !(space[order.key] === undefined || space[order.key] === null)
+      )
+      .sort(comparator),
+    ...resultingSpaces.filter(
+      space => space[order.key] === undefined || space[order.key] === null
     )
-    .sort(comparator);
+  ];
+
+  const filterPredicates = filters.map(({ predicate }) => predicate);
+  const targetedSpaces = filterPredicates.reduce(
+    (acc, p) => acc.filter(p),
+    sortedSpaces
+  );
+
+  // const maybeTargetedSpaces = sortedSpaces
+  //   .filter(() => true)
+  //   .filter(space =>
+  //     targetedSpaces.every(targetedSpace => targetedSpace.id !== space.id)
+  //   );
+  const maybeTargetedSpaces = [];
 
   return {
-    city,
-    setCity,
+    query,
+    setQuery,
     order,
     setOrder,
     filters,
     setFilters,
-    filtersVisible,
-    showFilters,
-    hideFilters,
     allSpaces,
     targetedSpaces,
     maybeTargetedSpaces

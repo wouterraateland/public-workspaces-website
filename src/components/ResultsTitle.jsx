@@ -9,7 +9,7 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const Title = styled.h2``;
+const Title = styled.strong``;
 
 const ResultsTitle = ({ children }) => (
   <Container>

@@ -2,6 +2,7 @@ import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
 
 import { SpaceControlsProvider } from "contexts/SpaceControls";
+import { FilterVisibilityProvider } from "contexts/FilterVisibility";
 
 import Theme from "containers/Theme";
 
@@ -14,6 +15,21 @@ import Main from "components/Main";
 const isNothing = v => v === undefined || v === null;
 const maybe = (ifNothing, ifJust) => v =>
   isNothing(v) ? ifNothing(v) : ifJust(v);
+
+const toWorkerAppreciation = preference => {
+  switch (preference) {
+    case "Working preferred":
+      return 4;
+    case "Equal for working and consuming":
+      return 3;
+    case "Consuming preferred":
+      return 2;
+    case "Working disallowed":
+      return 0;
+    default:
+      return 1;
+  }
+};
 
 const Layout = ({ size, children, navChildren }) => {
   const data = useStaticQuery(graphql`
@@ -101,6 +117,7 @@ const Layout = ({ size, children, navChildren }) => {
   const allSpaces = data.allAirtable.edges.map(({ node: spaceNode }) => ({
     id: spaceNode.id,
     ...spaceNode.data,
+    workerAppreciation: toWorkerAppreciation(spaceNode.data.customerPreference),
     openingHours: maybe(() => null, edge => edge.node.periods)(
       data.allOpeningHours.edges.find(
         ({ node: openingHoursNode }) =>
@@ -122,15 +139,17 @@ const Layout = ({ size, children, navChildren }) => {
 
   return (
     <SpaceControlsProvider allSpaces={allSpaces}>
-      <Theme>
-        <Page>
-          <Nav siteTitle="Public Workspaces">{navChildren}</Nav>
-          <Main>
-            <Wrapper size={size}>{children}</Wrapper>
-          </Main>
-          <Footer />
-        </Page>
-      </Theme>
+      <FilterVisibilityProvider>
+        <Theme>
+          <Page>
+            <Nav siteTitle="Public Workspaces">{navChildren}</Nav>
+            <Main>
+              <Wrapper size={size}>{children}</Wrapper>
+            </Main>
+            <Footer />
+          </Page>
+        </Theme>
+      </FilterVisibilityProvider>
     </SpaceControlsProvider>
   );
 };
