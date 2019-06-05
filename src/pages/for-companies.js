@@ -1,4 +1,5 @@
 import React from "react";
+import { OutboundLink } from "gatsby-plugin-google-analytics";
 
 import Layout from "components/Layout";
 import SEO from "components/SEO";
@@ -14,8 +15,10 @@ const ForCompaniesPage = () => (
     <br />
     <p>
       You can add your company to the list by filling out{" "}
-      <a href="https://forms.gle/fLg6z5dqUCXjMPFa6">our form</a>. You can always
-      edit your data or finish the form later, by reopening it.
+      <OutboundLink href="https://forms.gle/fLg6z5dqUCXjMPFa6">
+        our form
+      </OutboundLink>
+      . You can always edit your data or finish the form later, by reopening it.
       <br />
       The basic data required to get on the site just takes 3 minutes to fill
       in.

@@ -1,4 +1,5 @@
 import React from "react";
+import { OutboundLink } from "gatsby-plugin-google-analytics";
 
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
@@ -16,13 +17,13 @@ const ForWorkersPage = () => (
     <p>
       If you feel like some information is not right, or if you have any
       suggestions, ideas or critiques, feel free to send us an email at{" "}
-      <a
+      <OutboundLink
         href="mailto:info@publicworkspaces.com"
         target="_blank"
         rel="noreferrer noopener"
       >
         info@publicworkspaces.com
-      </a>
+      </OutboundLink>
     </p>
   </Layout>
 );

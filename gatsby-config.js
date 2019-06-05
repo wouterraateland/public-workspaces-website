@@ -44,6 +44,14 @@ module.exports = {
       }
     },
     {
+      resolve: "gatsby-plugin-google-analytics",
+      options: {
+        trackingId: "UA-141549186-1",
+        head: false,
+        respectDNT: true
+      }
+    },
+    {
       resolve: "gatsby-plugin-root-import",
       options: {
         src: `${__dirname}/src`,
