@@ -130,7 +130,7 @@ const Button = styled.button`
 
 const FilterControl = () => {
   const { query, setQuery } = useSpaceControls();
-  const { toggle } = useFilterVisibility();
+  const { isVisible, toggle } = useFilterVisibility();
 
   return (
     <>
@@ -144,7 +144,7 @@ const FilterControl = () => {
         />
       </Container>
       <Button onClick={toggle}>
-        <FilterIcon /> Filters
+        <FilterIcon /> {isVisible ? "Close" : "Filters"}
       </Button>
     </>
   );

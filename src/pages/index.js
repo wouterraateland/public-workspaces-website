@@ -1,4 +1,5 @@
 import React from "react";
+import { OutboundLink } from "gatsby-plugin-google-analytics";
 
 import { SpaceControlsProvider } from "contexts/SpaceControls";
 import { FilterVisibilityProvider } from "contexts/FilterVisibility";
@@ -46,11 +47,12 @@ const IndexPage = ({ modal }) => {
               <p>Missing a space, or something else?</p>
               <br />
               <Button
+                as={OutboundLink}
                 importance="primary"
                 color="primary"
-                onClick={() =>
-                  window.open("https://forms.gle/TjFc5tNyW2nRX4H37", "_blank")
-                }
+                href="https://forms.gle/TjFc5tNyW2nRX4H37"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 Let us know
               </Button>

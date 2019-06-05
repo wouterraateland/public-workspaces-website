@@ -1,8 +1,9 @@
 import React from "react";
 import { OutboundLink } from "gatsby-plugin-google-analytics";
 
-import Layout from "../components/Layout";
-import SEO from "../components/SEO";
+import { Button } from "components/UI";
+import Layout from "components/Layout";
+import SEO from "components/SEO";
 
 const ForWorkersPage = () => (
   <Layout>
@@ -16,15 +17,18 @@ const ForWorkersPage = () => (
     </p>
     <p>
       If you feel like some information is not right, or if you have any
-      suggestions, ideas or critiques, feel free to send us an email at{" "}
-      <OutboundLink
-        href="mailto:info@publicworkspaces.com"
-        target="_blank"
-        rel="noreferrer noopener"
-      >
-        info@publicworkspaces.com
-      </OutboundLink>
+      suggestions, ideas or critiques...
     </p>
+    <Button
+      as={OutboundLink}
+      importance="primary"
+      color="primary"
+      href="https://forms.gle/TjFc5tNyW2nRX4H37"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Let us know
+    </Button>
   </Layout>
 );
 
