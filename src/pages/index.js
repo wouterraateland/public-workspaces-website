@@ -19,7 +19,7 @@ const IndexPage = ({ modal }) => {
       <FilterVisibilityProvider>
         <Layout size="large" navChildren={<FilterControl />} withFilters>
           <SEO
-            title="Find your space to work / study"
+            title="Discover your workspace"
             keywords={[
               "public workspace",
               "study place",

@@ -27,7 +27,12 @@ const Introduction = () => {
 
   return updates < 2 ? (
     <Container>
-      <h1>👨‍💻👩‍💻 Discover your workspace</h1>
+      <h1>
+        <span role="img" aria-label="workers">
+          👨‍💻👩‍💻
+        </span>{" "}
+        Discover your workspace
+      </h1>
       <p>
         Public Workspaces is a database of {spaceCount} workspaces in{" "}
         {cityCount === 1 ? "" : cityCount}{" "}
