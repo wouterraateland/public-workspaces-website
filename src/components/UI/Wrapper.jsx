@@ -13,8 +13,8 @@ const Wrapper = styled.div`
         return 35;
     }
   }}em;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
   margin: auto;
 `;
 Wrapper.displayName = "Wrapper";

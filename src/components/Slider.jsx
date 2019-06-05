@@ -11,25 +11,30 @@ const Button = styled.div`
   height: 3em;
   padding: 1em;
   border-radius: 100%;
+  box-shadow: ${props => props.theme.boxShadow.small};
 
   text-align: center;
   line-height: 1;
 
-  background: #fff9;
+  background: #fff;
 
-  opacity: 0;
+  opacity: 0.5;
 
   transition: opacity 0.2s ease-out;
 
   transform: translate(0, -50%);
+
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 const PrevButton = styled(Button)`
-  left: 2em;
+  left: 1em;
 `;
 
 const NextButton = styled(Button)`
-  right: 2em;
+  right: 1em;
 `;
 
 const CurrentSlide = styled.div`
@@ -37,13 +42,9 @@ const CurrentSlide = styled.div`
   height: 15em;
 
   background: url(${props => props.image}) no-repeat center / cover;
-
-  &:hover ${Button} {
-    opacity: 1;
-  }
 `;
 
-const Slider = ({ images }) => {
+const Slider = ({ images = [] }) => {
   const [currentImage, setCurrentImage] = useState(0);
 
   useEffect(() => setCurrentImage(0), [images]);

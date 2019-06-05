@@ -2,6 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "gatsby";
 
+import { Pill } from "components/UI";
+import OpenStatus from "./OpenStatus";
+import CustomerPreference from "./CustomerPreference";
+
 const Container = styled.div`
   width: 25%;
   padding: 0.5em;
@@ -22,74 +26,105 @@ const Header = styled.div`
 
   padding-top: 67%;
   border-radius: ${props => props.theme.borderRadius};
+  box-shadow: ${props => props.theme.boxShadow.small};
 
-  background: #0004 url(${props => props.backgroundImage}) no-repeat center /
-    cover;
-`;
+  background: url(${props => props.backgroundImage}) no-repeat center / cover;
 
-const Meta = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
 
-  margin-top: 0.5em;
+    background: #0006;
+  }
 `;
 
 const Name = styled.h3`
-  max-width: calc(100% - 1em);
-  margin: 0 0.5em 0 0;
+  position: absolute;
+  left: 0.5em;
+  bottom: 50%;
+  right: 0.5em;
+
+  margin: 0;
+  text-shadow: 0 0.25 0.5em #0006;
+
+  text-align: center;
+  color: #fff;
+
+  @media (max-width: 30em) {
+    transform: translate(0, 50%);
+  }
+`;
+
+const City = styled.p`
+  position: absolute;
+  top: 50%;
+  left: 0.5em;
+  right: 0.5em;
+
+  margin: 0;
+  text-shadow: 0 0.25 0.5em #0006;
+
+  text-align: center;
+  color: #fff;
+
+  @media (max-width: 30em) {
+    display: none;
+  }
 `;
 
 const StyledLink = styled(Link)`
   display: block;
+  position: relative;
 `;
 
-const OpenStatus = styled.div`
-  width: 0.5em;
-  height: 0.5em;
-
-  border-radius: 100%;
-
-  background: ${props =>
-    props.isOpen ? props.theme.color.success : props.theme.color.error};
+const Label = styled.span`
+  font-size: 1.5em;
+  line-height: 1.5em;
 `;
 
-const Corner = styled.small`
+const TopLeft = styled.small`
   position: absolute;
-  padding: 1.5em;
+  top: 0.5em;
+  left: 0.5em;
 
-  line-height: 1;
+  & * {
+    color: #fff;
+  }
 
-  background-color: #0004;
-  color: #fff;
+  strong {
+    line-height: 2.25em;
+  }
 `;
 
-const TopLeft = styled(Corner)`
-  top: -1em;
-  left: -1em;
+const TopRight = styled.small`
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
 
-  border-bottom-right-radius: 100%;
+  & * {
+    color: #fff;
+  }
 `;
 
-const TopRight = styled(Corner)`
-  top: -1em;
-  right: -1em;
+const WiFiValue = styled.span`
+  display: inline-block;
+  margin-left: 0.25em;
 
-  border-bottom-left-radius: 100%;
+  text-align: center;
 `;
 
-const BottomRight = styled(Corner)`
-  bottom: -1em;
-  right: -1em;
+const BottomLeft = styled(Pill)`
+  position: absolute;
+  left: 0;
+  bottom: 0;
 
-  border-top-left-radius: 100%;
-`;
+  margin: 0.5em;
 
-const BottomLeft = styled(Corner)`
-  bottom: -1em;
-  left: -1em;
-
-  border-top-right-radius: 100%;
+  font-size: smaller;
 `;
 
 const Space = ({ space }) => (
@@ -97,25 +132,33 @@ const Space = ({ space }) => (
     <StyledLink to={`/${space.slug}`}>
       <Header backgroundImage={space.images[0]}>
         <TopLeft>
-          <span role="img" aria-labelledby="Coffee Price">
+          <Label role="img" aria-labelledby="Coffee Price">
+            {/* eslint-disable-next-line */}
             ☕️
-          </span>{" "}
-          €{space.coffeePrice}
+          </Label>{" "}
+          <strong>{space.coffeePrice ? `€${space.coffeePrice}` : "?"}</strong>
         </TopLeft>
         <TopRight>
-          <span role="img" aria-labelledby="WiFi Speed">
+          <Label role="img" aria-labelledby="WiFi Speed">
+            {/* eslint-disable-next-line */}
             📶
-          </span>{" "}
-          {space.wifiSpeed}Mbps
+          </Label>
+          <WiFiValue>
+            <strong>{space.wifiSpeed ? space.wifiSpeed : "?"}</strong>
+            <br />
+            <small>Mbps</small>
+          </WiFiValue>
         </TopRight>
-        <BottomRight />
-        <BottomLeft />
+        <Name>{space.name}</Name>
+        <City>{space.city}</City>
+        {space.openingHours && (
+          <BottomLeft>
+            <OpenStatus openingHours={space.openingHours} />
+          </BottomLeft>
+        )}
       </Header>
+      <CustomerPreference customerPreference={space.customerPreference} />
     </StyledLink>
-    <Meta>
-      <Name>{space.name}</Name>
-      <OpenStatus isOpen={space.isOpen} />
-    </Meta>
   </Container>
 );
 

@@ -5,10 +5,10 @@ import { darken } from "polished";
 import useSpaceControls from "hooks/useSpaceControls";
 
 const orderKeys = [
-  { label: "Popularity", value: "popularity" },
-  { label: "Name", value: "name" },
+  { label: "Work Appreciation", value: "workerAppreciation" },
+  { label: "Alphabetical", value: "name" },
   { label: "WiFi Speed", value: "wifiSpeed" },
-  { label: "Distance", value: "distance" }
+  { label: "Coffee Price", value: "coffeePrice" }
 ];
 
 const SelectContainer = styled.label`

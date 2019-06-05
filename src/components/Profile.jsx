@@ -1,4 +1,5 @@
 import React from "react";
+import { OutboundLink } from "gatsby-plugin-google-analytics";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -30,7 +31,13 @@ const Profile = ({ avatar: Avatar, linkedIn, name }) => (
     </AvatarContainer>
     <InfoContainer>
       <h2>{name}</h2>
-      <a href={`https://linkedin.com/in/${linkedIn}`}>LinkedIn</a>
+      <OutboundLink
+        href={`https://linkedin.com/in/${linkedIn}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        LinkedIn
+      </OutboundLink>
     </InfoContainer>
   </Container>
 );

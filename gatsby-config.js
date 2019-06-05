@@ -1,24 +1,12 @@
 require("dotenv").config();
 
-const googleSpreadsheetCredentials = {
-  type: "service_account",
-  project_id: "reference-hold-235811",
-  client_email: "google-sheets@reference-hold-235811.iam.gserviceaccount.com",
-  client_id: "117739090738885782487",
-  auth_uri: "https://accounts.google.com/o/oauth2/auth",
-  token_uri: "https://oauth2.googleapis.com/token",
-  auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
-  client_x509_cert_url:
-    "https://www.googleapis.com/robot/v1/metadata/x509/google-sheets%40reference-hold-235811.iam.gserviceaccount.com",
-  private_key_id: process.env.GOOGLE_SHEETS_PRIVATE_KEY_ID,
-  private_key: process.env.GOOGLE_SHEETS_PRIVATE_KEY
-};
-
 module.exports = {
   siteMetadata: {
     title: `Public Workspaces`,
-    description: `Find public workspaces near to you in a breeze.`,
-    author: `@wouterraateland, @DSwaab`
+    description: `Discover public workspaces near you in a breeze.`,
+    author: `@wouterraateland, @DSwaab`,
+    url: "https://publicworkspaces.com",
+    image: "/og-image.png"
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -30,12 +18,6 @@ module.exports = {
       }
     },
     `gatsby-transformer-json`,
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `${__dirname}/src/data`
-      }
-    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
@@ -64,27 +46,52 @@ module.exports = {
       }
     },
     {
+      resolve: "gatsby-plugin-google-analytics",
+      options: {
+        trackingId: "UA-141549186-1",
+        head: false,
+        respectDNT: true
+      }
+    },
+    {
       resolve: "gatsby-plugin-root-import",
       options: {
         src: `${__dirname}/src`,
         components: `${__dirname}/src/components`,
         containers: `${__dirname}/src/containers`,
         contexts: `${__dirname}/src/contexts`,
-        data: `${__dirname}/src/data`,
         hooks: `${__dirname}/src/hooks`,
         images: `${__dirname}/src/images`,
         pages: `${__dirname}/src/pages`,
         utils: `${__dirname}/src/utils`
       }
     },
-    // {
-    //   resolve: "gatsby-source-google-sheets",
-    //   options: {
-    //     spreadsheetId: process.env.GOOGLE_SHEETS_SPREADSHEET_ID,
-    //     worksheetTitle: process.env.GOOGLE_SHEETS_WORKSHEET_TITLE,
-    //     credentials: googleSpreadsheetCredentials
-    //   }
-    // },
+    {
+      resolve: `gatsby-source-airtable`,
+      options: {
+        apiKey: process.env.AIRTABLE_API_KEY,
+        tables: [
+          {
+            baseId: `appc4kmOlCItPKkiU`,
+            tableName: `Workspaces`,
+            mapping: {
+              Images: "[fileNode]"
+            },
+            tableLinks: ["Private_Spaces", "Contacts"]
+          },
+          {
+            baseId: `appc4kmOlCItPKkiU`,
+            tableName: `Private Spaces`,
+            tableLinks: ["Workspace"]
+          },
+          {
+            baseId: `appc4kmOlCItPKkiU`,
+            tableName: `Contacts`,
+            tableLinks: ["Workspaces"]
+          }
+        ]
+      }
+    },
     `gatsby-plugin-styled-components`
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline

@@ -1,15 +1,18 @@
-import React, { useMemo } from "react";
-import _ from "utils";
+import React from "react";
 import styled from "styled-components";
 import { darken } from "polished";
 
 import useSpaceControls from "hooks/useSpaceControls";
+import useFilterVisibility from "hooks/useFilterVisibility";
 
 const Container = styled.label`
   cursor: pointer;
 
   display: inline-block;
-  width: calc(100% - 2.2em);
+  width: calc(100% - 5.5em);
+
+  background-color: #fff;
+  background-clip: padding-box;
 
   border: 0.1em solid #0002;
   border-radius: ${props => props.theme.borderRadius} 0 0
@@ -20,50 +23,14 @@ const Container = styled.label`
   }
 
   &:focus-within {
-    border-color: ${props => props.theme.color.primary};
-  }
-`;
-
-const LocationIcon = styled.span`
-  position: relative;
-
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  margin: 0.5em;
-  border: 0.1em solid #000;
-  border-radius: 100%;
-
-  opacity: 0.6;
-
-  &::before,
-  &::after {
-    content: "";
-
-    position: absolute;
-    left: 50%;
-    top: 50%;
-
-    border-radius: 0.1em;
-
-    background: #000;
-
-    transform: translate(-50%, -50%);
-  }
-
-  &::before {
-    width: 1.2em;
-    height: 0.2em;
-  }
-
-  &::after {
-    width: 0.2em;
-    height: 1.2em;
+    border-color: #0004;
   }
 `;
 
 const FilterIcon = styled.div`
   position: relative;
+
+  display: inline-block;
   width: 1em;
   height: 1em;
 
@@ -83,11 +50,52 @@ const FilterIcon = styled.div`
   }
 `;
 
-const Select = styled.select`
-  cursor: pointer;
-  -webkit-appearance: none;
+const SearchIcon = styled.div`
+  position: relative;
 
+  display: block;
+  width: 1.5em;
+  height: 1.5em;
+  margin: 0.25em 0 0.25em 0.5em;
+
+  float: left;
+
+  color: #000;
+  opacity: 0.5;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+  }
+
+  &::before {
+    right: 0.1em;
+    top: 0.1em;
+
+    width: 1em;
+    height: 1em;
+    border: 0.2em solid;
+    border-radius: 100%;
+  }
+
+  &::after {
+    left: 0.4em;
+    bottom: -0.2em;
+
+    width: 0.2em;
+    height: 0.6em;
+
+    background: currentColor;
+
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+`;
+
+const Input = styled.input`
+  display: block;
   width: calc(100% - 2em);
+  height: 2em;
   padding: 0.5em;
   border: none;
 
@@ -101,7 +109,7 @@ const Select = styled.select`
 const Button = styled.button`
   cursor: pointer;
 
-  width: 2.2em;
+  width: 5.5em;
   padding: 0.6em;
   border: none;
   border-radius: 0 0.25em 0.25em 0;
@@ -120,30 +128,26 @@ const Button = styled.button`
   }
 `;
 
-const CityControl = () => {
-  const { allSpaces, city, setCity, showFilters } = useSpaceControls();
-
-  const allCities = useMemo(() => _.unique(_.mapKey("city")(allSpaces)), [
-    allSpaces
-  ]);
+const FilterControl = () => {
+  const { query, setQuery } = useSpaceControls();
+  const { toggle } = useFilterVisibility();
 
   return (
     <>
       <Container>
-        <LocationIcon />
-        <Select value={city} onChange={event => setCity(event.target.value)}>
-          {allCities.map(city => (
-            <option key={city} value={city}>
-              {city}
-            </option>
-          ))}
-        </Select>
+        <SearchIcon />
+        <Input
+          placeholder="Search workspaces, cities, ..."
+          value={query}
+          onChange={event => setQuery(event.target.value)}
+          type="search"
+        />
       </Container>
-      <Button onClick={showFilters}>
-        <FilterIcon />
+      <Button onClick={toggle}>
+        <FilterIcon /> Filters
       </Button>
     </>
   );
 };
 
-export default CityControl;
+export default FilterControl;
