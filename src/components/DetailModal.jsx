@@ -1,4 +1,4 @@
-import React, { Fragment, useRef } from "react";
+import React, { Fragment, useEffect, useRef } from "react";
 import { navigate } from "gatsby";
 import styled from "styled-components";
 
@@ -118,6 +118,16 @@ const t = msg => {
 const DetailModal = ({ space }) => {
   const ref = useRef(null);
   useClickOutside({ ref, onClickOutside: () => navigate("/") });
+
+  useEffect(() => {
+    if (!space) {
+      navigate("/");
+    }
+  }, [space]);
+
+  if (!space) {
+    return null;
+  }
 
   const preferenceMessage = getPreferenceMessage(space.workerAppreciation);
 
