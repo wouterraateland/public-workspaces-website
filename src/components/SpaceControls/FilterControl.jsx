@@ -116,7 +116,7 @@ const Button = styled.button`
 
   line-height: 1;
 
-  background-color: #0004;
+  background-color: ${props => props.theme.color.primary};
   color: #fff;
 
   &:hover {

@@ -9,6 +9,7 @@ import Layout from "components/Layout";
 import SEO from "components/SEO";
 import SpaceBrowser from "components/SpaceBrowser";
 import FilterControl from "components/SpaceControls/FilterControl";
+import Introduction from "components/Introduction";
 import { Align, Button, Message, VSpace } from "components/UI";
 
 const IndexPage = ({ modal }) => {
@@ -18,9 +19,26 @@ const IndexPage = ({ modal }) => {
       <FilterVisibilityProvider>
         <Layout size="large" navChildren={<FilterControl />} withFilters>
           <SEO
-            title="Find Public Workspaces"
-            keywords={["public workspace", "cafe"]}
+            title="Find your space to work / study"
+            keywords={[
+              "public workspace",
+              "study place",
+              "flexwerk",
+              "workspace",
+              "study delft",
+              "werkplek",
+              "studeren delft",
+              "werken delft",
+              "working delft",
+              "meeting spot",
+              "hipster cafe",
+              "cafe",
+              "coffeeshop",
+              "delft",
+              "city"
+            ]}
           />
+          <Introduction />
           <SpaceBrowser />
           <VSpace.Large />
           <Align.Center>

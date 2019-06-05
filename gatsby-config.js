@@ -3,8 +3,10 @@ require("dotenv").config();
 module.exports = {
   siteMetadata: {
     title: `Public Workspaces`,
-    description: `Find public workspaces near to you in a breeze.`,
-    author: `@wouterraateland, @DSwaab`
+    description: `Discover public workspaces near you in a breeze.`,
+    author: `@wouterraateland, @DSwaab`,
+    url: "https://publicworkspaces.com",
+    image: "/images/og-image.png"
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

@@ -2,22 +2,27 @@ import React from "react";
 import Helmet from "react-helmet";
 import { useStaticQuery, graphql } from "gatsby";
 
-function SEO({ description, lang, meta, keywords, title }) {
-  const { site } = useStaticQuery(
+function SEO({ description, image, lang, keywords, title }) {
+  const {
+    site: { siteMetadata: meta }
+  } = useStaticQuery(
     graphql`
       query {
         site {
           siteMetadata {
+            url
             title
             description
             author
+            image
           }
         }
       }
     `
   );
 
-  const metaDescription = description || site.siteMetadata.description;
+  const metaDescription = description || meta.description;
+  const ogImage = image || meta.image;
 
   return (
     <Helmet
@@ -25,11 +30,19 @@ function SEO({ description, lang, meta, keywords, title }) {
         lang
       }}
       title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      titleTemplate={`%s | ${meta.title}`}
       meta={[
         {
           name: `description`,
           content: metaDescription
+        },
+        {
+          property: `og:type`,
+          content: `website`
+        },
+        {
+          property: `og:url`,
+          content: meta.url
         },
         {
           property: `og:title`,
@@ -40,16 +53,16 @@ function SEO({ description, lang, meta, keywords, title }) {
           content: metaDescription
         },
         {
-          property: `og:type`,
-          content: `website`
+          property: `og:image`,
+          content: `${meta.url}${ogImage}`
         },
         {
           name: `twitter:card`,
-          content: `summary`
+          content: `summary_large_image`
         },
         {
-          name: `twitter:creator`,
-          content: site.siteMetadata.author
+          name: `twitter:url`,
+          content: meta.url
         },
         {
           name: `twitter:title`,
@@ -58,17 +71,19 @@ function SEO({ description, lang, meta, keywords, title }) {
         {
           name: `twitter:description`,
           content: metaDescription
+        },
+        {
+          property: `twitter:image`,
+          content: `${meta.url}${ogImage}`
         }
-      ]
-        .concat(
-          keywords.length > 0
-            ? {
-                name: `keywords`,
-                content: keywords.join(`, `)
-              }
-            : []
-        )
-        .concat(meta)}
+      ].concat(
+        keywords.length > 0
+          ? {
+              name: `keywords`,
+              content: keywords.join(`, `)
+            }
+          : []
+      )}
     />
   );
 }

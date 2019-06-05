@@ -21,8 +21,9 @@ const NavContainer = styled.nav`
       ? props.theme.boxShadow.medium
       : "0 .5rem 1.5rem -.5rem #0000"};
 
-  background-color: ${props => props.theme.color.primary};
-  color: #fff;
+  background-color: #fff;
+  ${"" /* background-color: ${props => props.theme.color.primary};
+  color: #fff; */}
 
   will-change: box-shadow;
   transition: box-shadow 0.2s ease-out;
@@ -33,8 +34,8 @@ const NavWrapper = styled(Wrapper)`
   justify-content: space-between;
   align-items: center;
 
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
+  padding-top: 1em;
+  padding-bottom: 1em;
 `;
 
 const StyledLogo = styled(Logo)`
@@ -48,10 +49,12 @@ const ControlsContainer = styled.div`
   flex-grow: 1;
 
   margin: 0 1em;
+  max-width: 30em;
 `;
 
 const StyledMenuContainer = styled(Menu.Container)`
   flex-grow: 0;
+  margin-left: auto;
 `;
 
 const Title = styled.h1`

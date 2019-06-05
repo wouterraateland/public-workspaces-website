@@ -123,7 +123,7 @@ const DetailModal = ({ space }) => {
 
   return (
     <Background>
-      <SEO title={`${space.name}, ${space.city} | Public Workspaces`} />
+      <SEO title={`${space.name}, ${space.city}`} />
       <Container ref={ref}>
         <Slider images={space.images} />
         <Body>
