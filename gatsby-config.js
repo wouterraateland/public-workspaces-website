@@ -6,7 +6,7 @@ module.exports = {
     description: `Discover public workspaces near you in a breeze.`,
     author: `@wouterraateland, @DSwaab`,
     url: "https://publicworkspaces.com",
-    image: "/images/og-image.png"
+    image: "/og-image.png"
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
