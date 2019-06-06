@@ -4,16 +4,8 @@ import SpaceControlsContext from "contexts/SpaceControls";
 
 import useSearchQuery from "hooks/useSearchQuery";
 
-const ORDER = {
-  ASCENDING: 1,
-  DESCENDING: -1
-};
-
 export const useSpaceControlsProvider = ({ allSpaces }) => {
-  const [order, setOrder] = useState({
-    key: "workerAppreciation",
-    order: ORDER.DESCENDING
-  });
+  const [order, setOrder] = useState({ key: "workerAppreciation", order: -1 });
   const [filters, setFilters] = useState([]);
 
   const { query, setQuery, filteredData: resultingSpaces } = useSearchQuery(

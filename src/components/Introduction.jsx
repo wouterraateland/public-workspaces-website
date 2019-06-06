@@ -11,21 +11,23 @@ const Container = styled.div`
   text-align: center;
 `;
 
+let totalUpdates = 0;
+
 const Introduction = () => {
-  const [updates, setUpdates] = useState(0);
+  const [, setUpdates] = useState(totalUpdates);
 
   const { isVisible } = useFilterVisibility();
   const { allSpaces, order, filters, query } = useSpaceControls();
 
   useEffect(() => {
-    setUpdates(updates => updates + 1);
+    setUpdates(++totalUpdates);
   }, [isVisible, order, filters, query]);
 
   const countingSpaces = allSpaces.filter(({ name, city }) => name && city);
   const spaceCount = countingSpaces.length;
   const cityCount = new Set(countingSpaces.map(({ city }) => city)).size;
 
-  return updates < 2 ? (
+  return totalUpdates < 3 ? (
     <Container>
       <h1>
         <span role="img" aria-label="workers">

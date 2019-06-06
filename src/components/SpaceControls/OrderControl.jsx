@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { darken } from "polished";
 
@@ -83,6 +83,10 @@ const OrderIcon = styled.div`
 
 const OrderControl = () => {
   const { order, setOrder } = useSpaceControls();
+
+  useEffect(() => {
+    setOrder({ key: "workerAppreciation", order: -1 });
+  }, []);
 
   return (
     <div>
