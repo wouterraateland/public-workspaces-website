@@ -2,15 +2,16 @@ import React from "react";
 import moment from "moment";
 import styled from "styled-components";
 
-const Indicator = styled.span`
+const Indicator = styled.span.attrs(props => ({
+  style: {
+    backgroundColor: props.theme.color[props.isOpen ? "success" : "error"]
+  }
+}))`
   display: inline-block;
   width: 1em;
   height: 1em;
   margin-right: 0.5em;
   border-radius: 0.5em;
-
-  background-color: ${props =>
-    props.theme.color[props.isOpen ? "success" : "error"]};
 
   transform: scale(1.01);
 `;

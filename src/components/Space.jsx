@@ -19,7 +19,11 @@ const Container = styled.div`
   }
 `;
 
-const Header = styled.div`
+const Header = styled.div.attrs(({ backgroundImage }) => ({
+  style: {
+    backgroundImage: `url(${backgroundImage})`
+  }
+}))`
   position: relative;
 
   overflow: hidden;
@@ -28,7 +32,7 @@ const Header = styled.div`
   border-radius: ${props => props.theme.borderRadius};
   box-shadow: ${props => props.theme.boxShadow.small};
 
-  background: url(${props => props.backgroundImage}) no-repeat center / cover;
+  background: no-repeat center / cover;
 
   &::before {
     content: "";
