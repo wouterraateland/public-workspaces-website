@@ -44,7 +44,7 @@ const Emoji = styled.span`
 
 const allFilters = [
   {
-    name: "appreciation",
+    name: "workerAppreciation",
     emoji: "👨‍💻",
     label: "Worker Appreciation",
     options: [
@@ -87,7 +87,7 @@ const allFilters = [
     ]
   },
   {
-    name: "isOpen",
+    name: "openingHours",
     emoji: "⏰",
     label: "Open",
     options: [
@@ -134,7 +134,7 @@ const allFilters = [
     ]
   },
   {
-    name: "wifi",
+    name: "wifiSpeed",
     emoji: "📶",
     label: "WiFi Speed",
     options: [

@@ -6,7 +6,11 @@ import { Pill } from "components/UI";
 import OpenStatus from "./OpenStatus";
 import CustomerPreference from "./CustomerPreference";
 
-const Container = styled.div`
+const Container = styled.div.attrs(({ i }) => ({
+  style: {
+    animationDelay: `${i / 30}s`
+  }
+}))`
   width: 25%;
   padding: 0.5em;
 
@@ -131,8 +135,8 @@ const BottomLeft = styled(Pill)`
   font-size: smaller;
 `;
 
-const Space = ({ space }) => (
-  <Container>
+const Space = ({ space, i }) => (
+  <Container i={i}>
     <StyledLink to={`/${space.slug}`}>
       <Header backgroundImage={space.images[0]}>
         <TopLeft>

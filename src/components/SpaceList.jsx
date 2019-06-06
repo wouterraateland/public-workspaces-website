@@ -11,8 +11,8 @@ const SpaceListContainer = styled.div`
 
 const SpaceList = ({ spaces }) => (
   <SpaceListContainer>
-    {spaces.map(space => (
-      <Space key={space.id} space={space} />
+    {spaces.map((space, i) => (
+      <Space key={space.id} space={space} i={i} />
     ))}
   </SpaceListContainer>
 );

@@ -10,14 +10,12 @@ const SpaceOverview = () => {
 
   return (
     <>
-      {targetedSpaces.length > 0 ? (
-        <>
-          <ResultsTitle>Found {targetedSpaces.length} workspaces</ResultsTitle>
-          <SpaceList spaces={targetedSpaces} />
-        </>
-      ) : (
-        <h2>No workspaces found</h2>
-      )}
+      <ResultsTitle>
+        {targetedSpaces.length > 0
+          ? `Found ${targetedSpaces.length} workspaces`
+          : "No workspaces found"}
+      </ResultsTitle>
+      <SpaceList spaces={targetedSpaces} />
       {maybeTargetedSpaces.length > 0 ? (
         <>
           <ResultsTitle>

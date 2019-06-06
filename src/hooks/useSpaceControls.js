@@ -5,7 +5,7 @@ import SpaceControlsContext from "contexts/SpaceControls";
 import useSearchQuery from "hooks/useSearchQuery";
 
 export const useSpaceControlsProvider = ({ allSpaces }) => {
-  const [order, setOrder] = useState({ key: "workerAppreciation", order: -1 });
+  const [order, setOrder] = useState({ key: null, order: 1 });
   const [filters, setFilters] = useState([]);
 
   const { query, setQuery, filteredData: resultingSpaces } = useSearchQuery(
@@ -18,29 +18,37 @@ export const useSpaceControlsProvider = ({ allSpaces }) => {
     order.order
   ]);
 
-  const sortedSpaces = [
-    ...resultingSpaces
-      .filter(
-        space => !(space[order.key] === undefined || space[order.key] === null)
-      )
-      .sort(comparator),
-    ...resultingSpaces.filter(
-      space => space[order.key] === undefined || space[order.key] === null
-    )
-  ];
+  const sortedSpaces = order.key
+    ? [
+        ...resultingSpaces
+          .filter(
+            space =>
+              !(space[order.key] === undefined || space[order.key] === null)
+          )
+          .sort(comparator),
+        ...resultingSpaces.filter(
+          space => space[order.key] === undefined || space[order.key] === null
+        )
+      ]
+    : [];
 
-  const filterPredicates = filters.map(({ predicate }) => predicate);
-  const targetedSpaces = filterPredicates.reduce(
-    (acc, p) => acc.filter(p),
+  const targetedSpaces = filters.reduce(
+    (acc, filter) => acc.filter(filter.predicate),
     sortedSpaces
   );
 
-  // const maybeTargetedSpaces = sortedSpaces
-  //   .filter(() => true)
-  //   .filter(space =>
-  //     targetedSpaces.every(targetedSpace => targetedSpace.id !== space.id)
-  //   );
-  const maybeTargetedSpaces = [];
+  const maybeTargetedSpaces = filters.reduce(
+    (acc, filter) =>
+      acc.filter(
+        space =>
+          space[filter.name] === undefined ||
+          space[filter.name] === null ||
+          (filter.name === "workerAppreciation" && space[filter.name] === 1)
+      ),
+    sortedSpaces.filter(space =>
+      targetedSpaces.every(targetedSpace => targetedSpace.id !== space.id)
+    )
+  );
 
   return {
     query,
