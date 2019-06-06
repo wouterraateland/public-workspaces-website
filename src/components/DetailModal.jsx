@@ -148,9 +148,20 @@ const DetailModal = ({ space }) => {
               <tr>
                 <td>
                   {/*eslint-disable-next-line*/}
+                  <Emoji>☕️</Emoji> Coffee Price
+                </td>
+                <td>
+                  {space.coffeePrice
+                    ? `€${space.coffeePrice.toFixed(2).replace(".", ",")}`
+                    : "?"}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  {/*eslint-disable-next-line*/}
                   <Emoji>📶</Emoji> WiFi Speed
                 </td>
-                <td>{space.wifiSpeed}Mbps</td>
+                <td>{space.wifiSpeed ? `${space.wifiSpeed}Mbps` : "?"}</td>
               </tr>
               <tr>
                 <td>

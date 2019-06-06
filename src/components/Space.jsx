@@ -136,7 +136,11 @@ const Space = ({ space }) => (
             {/* eslint-disable-next-line */}
             ☕️
           </Label>{" "}
-          <strong>{space.coffeePrice ? `€${space.coffeePrice}` : "?"}</strong>
+          <strong>
+            {space.coffeePrice
+              ? `€${space.coffeePrice.toFixed(2).replace(".", ",")}`
+              : "?"}
+          </strong>
         </TopLeft>
         <TopRight>
           <Label role="img" aria-labelledby="WiFi Speed">
