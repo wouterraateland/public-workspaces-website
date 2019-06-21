@@ -93,7 +93,7 @@ const OrderControl = () => {
       <SelectContainer>
         <OrderIcon />
         <Select
-          value={order.key}
+          value={order.key ? order.key : ""}
           onChange={({ target }) =>
             setOrder(order => ({ ...order, key: target.value }))
           }

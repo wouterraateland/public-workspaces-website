@@ -28,16 +28,25 @@ exports.sourceNodes = ({
 
   const { createNode, createNodeField } = actions;
 
-  const processOpeningHours = (placeId, periods) => {
-    const data = { placeId, periods };
-    const nodeId = createNodeId(`opening-hours-${placeId}`);
+  const processPlaceDetails = (placeId, result) => {
+    const data = {
+      placeId,
+      address: result.formatted_address,
+      url: result.url,
+      website: result.website,
+      openingHours:
+        result.opening_hours && result.opening_hours.periods
+          ? result.opening_hours.periods
+          : null
+    };
+    const nodeId = createNodeId(`place-details-${placeId}`);
     const nodeContent = JSON.stringify(data);
     const nodeData = Object.assign({}, data, {
       id: nodeId,
       parent: null,
       children: [],
       internal: {
-        type: `OpeningHours`,
+        type: `PlaceDetails`,
         content: nodeContent,
         contentDigest: createContentDigest(data)
       }
@@ -45,12 +54,12 @@ exports.sourceNodes = ({
     return nodeData;
   };
 
-  const createOpeningHourNodesForPlace = (placeid, opening_hours) => {
-    if (opening_hours && opening_hours.periods) {
-      const nodeData = processOpeningHours(placeid, opening_hours.periods);
+  const createPlaceDetailNodesForPlace = (placeid, result) => {
+    if (result) {
+      const nodeData = processPlaceDetails(placeid, result);
       createNode(nodeData);
     } else {
-      console.warn(`No opening times for ${placeid}`);
+      console.warn(`No place details for ${placeid}`);
     }
   };
 
@@ -90,7 +99,7 @@ exports.sourceNodes = ({
   const createNodesForPlace = placeid => {
     const apiOptions = queryString.stringify({
       key: process.env.GOOGLE_API_KEY,
-      fields: "opening_hours,photos",
+      fields: "opening_hours,photos,formatted_address,url,website",
       placeid
     });
 
@@ -100,7 +109,7 @@ exports.sourceNodes = ({
       .then(response => response.json())
       .then(async data => {
         if (data && data.result) {
-          createOpeningHourNodesForPlace(placeid, data.result.opening_hours);
+          createPlaceDetailNodesForPlace(placeid, data.result);
           await createPhotoNodesForPlace(placeid, data.result.photos);
         } else {
           console.warn(`No data for ${placeid}`);

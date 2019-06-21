@@ -32,12 +32,15 @@ const useSpaces = () => {
           }
         }
       }
-      allOpeningHours {
+      allPlaceDetails {
         edges {
           node {
             id
             placeId
-            periods {
+            address
+            url
+            website
+            openingHours {
               open {
                 day
                 time
@@ -103,15 +106,15 @@ const useSpaces = () => {
     }
   `);
   const allSpaces = data.allAirtable.edges.map(({ node: spaceNode }) => ({
-    id: spaceNode.id,
-    ...spaceNode.data,
-    workerAppreciation: toWorkerAppreciation(spaceNode.data.customerPreference),
-    openingHours: maybe(() => null, edge => edge.node.periods)(
-      data.allOpeningHours.edges.find(
-        ({ node: openingHoursNode }) =>
-          openingHoursNode.placeId === spaceNode.data.placeId
+    ...maybe(() => ({}), edge => edge.node)(
+      data.allPlaceDetails.edges.find(
+        ({ node: placeDetailsNode }) =>
+          placeDetailsNode.placeId === spaceNode.data.placeId
       )
     ),
+    ...spaceNode.data,
+    id: spaceNode.id,
+    workerAppreciation: toWorkerAppreciation(spaceNode.data.customerPreference),
     images: (spaceNode.data.images
       ? spaceNode.data.images.raw.map(raw => raw.thumbnails.large.url)
       : []

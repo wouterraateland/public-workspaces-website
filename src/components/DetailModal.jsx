@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useRef } from "react";
 import { navigate } from "gatsby";
 import styled from "styled-components";
+import { OutboundLink } from "gatsby-plugin-google-analytics";
 
 import useClickOutside from "hooks/useClickOutside";
 
@@ -115,6 +116,8 @@ const t = msg => {
   }
 };
 
+const removeProtocol = s => new URL(s).hostname;
+
 const DetailModal = ({ space }) => {
   const ref = useRef(null);
   useClickOutside({ ref, onClickOutside: () => navigate("/") });
@@ -140,9 +143,33 @@ const DetailModal = ({ space }) => {
           <Title>
             {space.name} - {space.city}
           </Title>
+          <p>
+            {space.website && (
+              <>
+                <strong>Web: </strong>
+                <OutboundLink
+                  href={space.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {removeProtocol(space.website)}
+                </OutboundLink>
+                <br />
+              </>
+            )}
+            <strong>Location: </strong>
+            <OutboundLink
+              href={space.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {space.address}
+            </OutboundLink>
+          </p>
           <Tagline>
             <StyledCustomerPreference {...space} /> {preferenceMessage}
           </Tagline>
+          <h3>Details</h3>
           <Table>
             <tbody>
               <tr>
